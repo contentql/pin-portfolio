@@ -1,5 +1,7 @@
 import type { Config } from 'tailwindcss'
 
+import { colors } from './src/lib/theme'
+
 const config: Config = {
   darkMode: 'class',
   content: [
@@ -19,32 +21,7 @@ const config: Config = {
     },
     extend: {
       colors: {
-        primary: 'hsl(var(--primary))',
-        text: 'hsl(var(--text))',
-        secondary: 'hsl(var(--secondary))',
-        background: 'hsl(var(--background))',
-        card: 'hsl(var(--card))',
-        input: 'hsl(var(--input))',
-        transparent: 'transparent',
-        info: {
-          DEFAULT: 'hsl(var(--info))',
-          foreground: 'hsl(var(--info-foreground))',
-        },
-        warning: {
-          DEFAULT: 'hsl(var(--warning))',
-          foreground: 'hsl(var(--warning-foreground))',
-        },
-        danger: {
-          DEFAULT: 'hsl(var(--danger))',
-          foreground: 'hsl(var(--danger-foreground))',
-        },
-        success: {
-          DEFAULT: 'hsl(var(--success))',
-          foreground: 'hsl(var(--success-foreground))',
-        },
-        popover: 'hsl(var(--popover))',
-        pink: 'hsl(var(--pink))',
-        indigo: 'hsl(var(--indigo))',
+        ...colors,
       },
       borderRadius: {
         DEFAULT: '0.5rem',
@@ -60,23 +37,25 @@ const config: Config = {
         'custom-ease': 'cubic-bezier(0.33, 1, 0.68, 1)',
       },
       keyframes: {
-        'image-blur-frames': {
-          '0%': { filter: 'blur(16px)' },
-          '100%': { filter: 'blur(0px)' },
-        },
-        'accordion-down': {
-          from: { height: '0' },
-          to: { height: 'var(--radix-accordion-content-height)' },
-        },
-        'accordion-up': {
-          from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: '0' },
+        text: {
+          '0%, 100%': {
+            'background-size': '200% 200%',
+            'background-position': 'left center',
+          },
+          '50%': {
+            'background-size': '200% 200%',
+            'background-position': 'right center',
+          },
         },
       },
       animation: {
-        'image-blur': 'image-blur-frames 0.1s ease-in',
-        'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out',
+        text: 'text 4s ease infinite',
+      },
+      boxShadow: {
+        button: `4px 4px 6px ${colors.primary}`,
+      },
+      maxWidth: {
+        portfolio: '50rem',
       },
     },
   },
