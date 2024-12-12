@@ -7,30 +7,85 @@ const HomeConfig: Block = {
     singular: 'Home Block',
     plural: 'Home Blocks',
   },
-  imageURL: '/images/blocks/hero-block.png',
+  // imageURL: '/images/blocks/hero-block.png',
   fields: [
     {
-      name: 'heading',
+      name: 'greetText',
       type: 'text',
-      label: 'Heading',
+      label: 'Greet Text',
+    },
+    {
+      name: 'name',
+      type: 'text',
+      label: 'Name',
       required: true,
     },
     {
-      name: 'subHeading',
+      name: 'description',
       type: 'text',
-      label: 'Sub Heading',
+      label: 'Description',
     },
     {
-      name: 'image',
-      type: 'relationship',
+      name: 'profilePicture',
+      label: 'Profile Picture',
+      type: 'upload',
       relationTo: 'media',
       required: true,
     },
     {
-      name: 'subscribeField',
-      type: 'checkbox',
-      required: true,
-      defaultValue: false,
+      name: 'socialLinks',
+      type: 'array',
+      label: 'Social Links',
+      fields: [
+        {
+          name: 'socialIcon',
+          type: 'select',
+          label: 'Social Icon',
+          required: true,
+          options: [
+            {
+              label: 'Facebook',
+              value: 'facebook',
+            },
+            {
+              label: 'Github',
+              value: 'github',
+            },
+            {
+              label: 'Gmail',
+              value: 'gmail',
+            },
+            {
+              label: 'Instagram',
+              value: 'instagram',
+            },
+            {
+              label: 'Linkedin',
+              value: 'linkedin',
+            },
+            {
+              label: 'Twitter',
+              value: 'twitter',
+            },
+          ],
+        },
+        {
+          name: 'socialIconLink',
+          type: 'text',
+          label: 'Social Icon Link',
+          required: true,
+        },
+      ],
+    },
+    {
+      name: 'button',
+      label: 'Button',
+      type: 'text',
+    },
+    {
+      name: 'buttonPath',
+      label: 'Button Path',
+      type: 'text',
     },
   ],
 }
