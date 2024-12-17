@@ -1,5 +1,6 @@
 'use client'
 
+import { SiteSetting } from '@payload-types'
 import { motion } from 'framer-motion'
 import { useTheme } from 'next-themes'
 import Image from 'next/image'
@@ -8,21 +9,49 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 import { slideIn } from '@/animation/framer'
-import { NAV_ITEMS, TNavItem } from '@/constants/nav-items'
-import { cn, getBoxIcon } from '@/utils/functions'
+import { TNavItem } from '@/constants/nav-items'
+import { cn } from '@/utils/functions'
+import { generateMenuLinks } from '@/utils/generateMenuLinks'
 
-const NavBar = () => {
+const NavBar = ({ siteSettingsData }: { siteSettingsData: SiteSetting }) => {
+  const { navbar } = siteSettingsData
+  const { logo, menuLinks } = navbar
+
+  const navLinks = menuLinks?.length ? generateMenuLinks(menuLinks) : []
+  let logoDetails = {
+    url: '',
+    alt: '',
+  }
+  if (Object.keys(logo).length && typeof logo?.imageUrl === 'string') {
+    logoDetails = {
+      url: logo?.imageUrl,
+      alt: `${siteSettingsData.general?.title} logo`,
+    }
+  } else if (Object.keys(logo).length && typeof logo?.imageUrl === 'object') {
+    logoDetails = {
+      url: logo.imageUrl?.url!,
+      alt: logo.imageUrl?.alt || `${siteSettingsData.general?.title} logo`,
+    }
+  }
   return (
     <div className='fixed inset-x-0 bottom-0 z-50 bg-bg-light/50 p-4 backdrop-blur-2xl dark:bg-bg-darker/50 md:bottom-auto md:top-0 md:p-8'>
       <motion.div
         className='mx-auto flex h-11 max-w-portfolio items-center justify-between gap-4 sm:gap-10'
         variants={slideIn('up', 'tween', 50, 0.01, 0.5)}>
-        <HomeButton className='hidden md:block' />
+        <HomeButton logo={logoDetails} className='hidden md:block' />
         <nav className='mx-auto my-2 flex size-full items-center justify-between rounded-full bg-bg-lighter px-2 drop-shadow-md dark:bg-bg-dark md:w-fit md:px-4'>
-          <HomeButton className='mr-2 block md:hidden' />
-          {NAV_ITEMS.map(item => (
-            <NavItem key={item.iconId} item={item} />
-          ))}
+          <HomeButton logo={logoDetails} className='mr-2 block md:hidden' />
+          {navLinks?.map(
+            navlink =>
+              navlink && (
+                <NavItem
+                  key={navlink?.href}
+                  label={navlink?.label}
+                  href={navlink?.href!}
+                  target={navlink?.type ? '_blank' : '_self'}
+                />
+              ),
+          )}
           <ToggleTheme className='ml-2 block md:hidden' />
         </nav>
         <ToggleTheme className='hidden md:block' />
@@ -34,10 +63,20 @@ const NavBar = () => {
 export default NavBar
 
 // Components
-const NavItem = ({ item }: { item: TNavItem }) => {
-  const { iconId, link } = item
+const NavItem = ({
+  item,
+  href,
+  target,
+  label,
+}: {
+  item?: TNavItem
+  href: string
+  target: string
+  label: string
+}) => {
+  // const { iconId, link } = item
   // Check if the current route matches the link
-  const isActiveLink = usePathname() === link
+  const isActiveLink = usePathname() === href
 
   return (
     <Link
@@ -47,13 +86,14 @@ const NavItem = ({ item }: { item: TNavItem }) => {
           'text-primary drop-shadow-md dark:text-secondary': isActiveLink,
         },
       )}
-      href={link}
-      id={link}>
-      <i
-        className={`${getBoxIcon(iconId)} text-2xl transition-colors duration-300 ease-in-out group-hover:text-primary dark:group-hover:text-secondary md:hidden`}
-      />
+      href={href}
+      id={href}
+      target={target}>
+      {/* <i
+        className={`${getBoxIcon(label)} text-2xl transition-colors duration-300 ease-in-out group-hover:text-primary dark:group-hover:text-secondary md:hidden`}
+      /> */}
       <p className='hidden text-lg font-semibold capitalize tracking-wider transition-colors duration-300 ease-in-out group-hover:text-primary dark:group-hover:text-secondary md:block'>
-        {iconId}
+        {label}
       </p>
       {isActiveLink && (
         <span className='absolute bottom-0 left-3 h-px w-[calc(100%-1.5rem)] bg-gradient-to-r from-transparent via-primary to-transparent transition-opacity duration-500 group-hover:opacity-50 dark:via-secondary' />
@@ -62,7 +102,16 @@ const NavItem = ({ item }: { item: TNavItem }) => {
   )
 }
 
-const HomeButton = ({ className }: { className?: string }) => {
+const HomeButton = ({
+  className,
+  logo,
+}: {
+  className?: string
+  logo: {
+    url: string
+    alt: string
+  }
+}) => {
   return (
     <Link
       className={cn(
@@ -72,10 +121,10 @@ const HomeButton = ({ className }: { className?: string }) => {
       href='/'>
       <span className='sr-only'>Home</span>
       <Image
-        alt='home'
+        alt={logo?.alt || 'home'}
         className='size-full'
         height={60}
-        src='/images/icons/logo.svg'
+        src={logo?.url}
         width={50}
       />
     </Link>

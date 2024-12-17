@@ -143,7 +143,7 @@ const Details: React.FC<DetailsProps> = async ({ params, ...block }) => {
         ['list', 'projects'],
         { tags: ['list-projects'] },
       )()
-      console.log({ projects })
+
       return <ProjectDetails projects={projects} />
     }
   }

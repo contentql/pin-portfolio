@@ -124,7 +124,7 @@ const List: React.FC<ListProps> = async ({ params, ...block }) => {
         ['list', 'projects'],
         { tags: ['list-projects'] },
       )()
-      console.log({ projects })
+
       return <ProjectsList projects={projects} title={block['title']} />
     }
   }

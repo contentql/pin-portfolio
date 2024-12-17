@@ -193,118 +193,19 @@ export interface Media {
 export interface StacksType {
   stacksHeading?: string | null;
   stacksDescription?: string | null;
-  languages?:
-    | (
-        | 'c'
-        | 'cplusplus'
-        | 'python'
-        | 'html'
-        | 'css'
-        | 'javascript'
-        | 'typescript'
-        | 'rust'
-        | 'go'
-        | 'kotlin'
-        | 'php'
-        | 'swift'
-        | 'ruby'
-        | 'perl'
-        | 'scala'
-        | 'dart'
-        | 'lua'
-        | 'haskell'
-        | 'elixir'
-        | 'clojure'
-        | 'r'
-      )[]
-    | null;
-  frameworksAndLibraries?:
-    | (
-        | 'react'
-        | 'redux'
-        | 'react-query'
-        | 'tailwindcss'
-        | 'nextjs'
-        | 'ant-design'
-        | 'shadcn-ui'
-        | 'material-ui'
-        | 'nodejs'
-        | 'expressjs'
-        | 'angular'
-        | 'docker'
-        | 'firebase'
-        | 'graphql'
-        | 'svelte'
-        | 'terraform'
-        | 'rust'
-      )[]
-    | null;
-  databases?:
-    | (
-        | 'firebase'
-        | 'mongodb'
-        | 'postgresql'
-        | 'supabase'
-        | 'mysql'
-        | 'redis'
-        | 'oracle'
-        | 'mariadb'
-        | 'cockroachdb'
-        | 'arangodb'
-        | 'neo4j'
-        | 'influxdb'
-        | 'elasticsearch'
-      )[]
-    | null;
-  tools?:
-    | (
-        | 'vite'
-        | 'git'
-        | 'chatgpt'
-        | 'postman'
-        | 'docker'
-        | 'jenkins'
-        | 'circleci'
-        | 'travisci'
-        | 'heroku'
-        | 'ansible'
-        | 'puppet'
-        | 'chef'
-        | 'datadog'
-        | 'prometheus'
-        | 'grafana'
-        | 'kibana'
-        | 'sentry'
-        | 'slack'
-        | 'discord'
-        | 'zapier'
-        | 'ngrok'
-      )[]
-    | null;
-  services?:
-    | (
-        | 'github'
-        | 'bitbucket'
-        | 'figma'
-        | 'trello'
-        | 'vercel'
-        | 'netlify'
-        | 'notion'
-        | 'heroku'
-        | 'googlecloud'
-        | 'firebase'
-        | 'dockerhub'
-        | 'slack'
-        | 'discord'
-        | 'jira'
-        | 'asana'
-        | 'gitlab'
-        | 'circleci'
-        | 'mailchimp'
-        | 'zendesk'
-        | 'zapier'
-        | 'postman'
-      )[]
+  technologies?:
+    | {
+        techHeading?: string | null;
+        techStacks?:
+          | {
+              color?: ('#FF8A00' | '#18A08B' | '#7373E2' | '#0099FF' | '#FA4000' | '#E100FF' | '#009245') | null;
+              techName?: string | null;
+              techImage?: (number | null) | Media;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
     | null;
   id?: string | null;
   blockName?: string | null;
@@ -339,7 +240,9 @@ export interface AboutType {
         codeProfile?:
           | {
               codeProfileTitle?: string | null;
+              codeProfileUrl?: string | null;
               codeProfileImage?: (number | null) | Media;
+              color?: ('#FF8A00' | '#18A08B' | '#7373E2' | '#0099FF' | '#FA4000' | '#E100FF' | '#009245') | null;
               id?: string | null;
             }[]
           | null;
@@ -874,11 +777,20 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               stacksHeading?: T;
               stacksDescription?: T;
-              languages?: T;
-              frameworksAndLibraries?: T;
-              databases?: T;
-              tools?: T;
-              services?: T;
+              technologies?:
+                | T
+                | {
+                    techHeading?: T;
+                    techStacks?:
+                      | T
+                      | {
+                          color?: T;
+                          techName?: T;
+                          techImage?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };
@@ -911,7 +823,9 @@ export interface PagesSelect<T extends boolean = true> {
                       | T
                       | {
                           codeProfileTitle?: T;
+                          codeProfileUrl?: T;
                           codeProfileImage?: T;
+                          color?: T;
                           id?: T;
                         };
                     id?: T;
