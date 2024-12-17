@@ -16,6 +16,7 @@ export interface Config {
     tags: Tag;
     media: Media;
     users: User;
+    projects: Project;
     forms: Form;
     'form-submissions': FormSubmission;
     search: Search;
@@ -30,6 +31,7 @@ export interface Config {
     tags: TagsSelect<false> | TagsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    projects: ProjectsSelect<false> | ProjectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
     search: SearchSelect<false> | SearchSelect<true>;
@@ -80,7 +82,19 @@ export interface UserAuthOperations {
 export interface Page {
   id: number;
   title: string;
-  layout?: (HomeType | DetailsType | ListType | NewsletterType | FormType | DisqusCommentsType)[] | null;
+  layout?:
+    | (
+        | HomeType
+        | StacksType
+        | AboutType
+        | ExperienceType
+        | DetailsType
+        | ListType
+        | NewsletterType
+        | FormType
+        | DisqusCommentsType
+      )[]
+    | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -110,10 +124,19 @@ export interface Page {
  * via the `definition` "HomeType".
  */
 export interface HomeType {
-  heading: string;
-  subHeading?: string | null;
-  image: number | Media;
-  subscribeField: boolean;
+  greetText?: string | null;
+  name: string;
+  description?: string | null;
+  profilePicture: number | Media;
+  socialLinks?:
+    | {
+        socialIcon: 'facebook' | 'github' | 'gmail' | 'instagram' | 'linkedin' | 'twitter';
+        socialIconLink: string;
+        id?: string | null;
+      }[]
+    | null;
+  button?: string | null;
+  buttonPath?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'Home';
@@ -165,10 +188,203 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StacksType".
+ */
+export interface StacksType {
+  stacksHeading?: string | null;
+  stacksDescription?: string | null;
+  languages?:
+    | (
+        | 'c'
+        | 'cplusplus'
+        | 'python'
+        | 'html'
+        | 'css'
+        | 'javascript'
+        | 'typescript'
+        | 'rust'
+        | 'go'
+        | 'kotlin'
+        | 'php'
+        | 'swift'
+        | 'ruby'
+        | 'perl'
+        | 'scala'
+        | 'dart'
+        | 'lua'
+        | 'haskell'
+        | 'elixir'
+        | 'clojure'
+        | 'r'
+      )[]
+    | null;
+  frameworksAndLibraries?:
+    | (
+        | 'react'
+        | 'redux'
+        | 'react-query'
+        | 'tailwindcss'
+        | 'nextjs'
+        | 'ant-design'
+        | 'shadcn-ui'
+        | 'material-ui'
+        | 'nodejs'
+        | 'expressjs'
+        | 'angular'
+        | 'docker'
+        | 'firebase'
+        | 'graphql'
+        | 'svelte'
+        | 'terraform'
+        | 'rust'
+      )[]
+    | null;
+  databases?:
+    | (
+        | 'firebase'
+        | 'mongodb'
+        | 'postgresql'
+        | 'supabase'
+        | 'mysql'
+        | 'redis'
+        | 'oracle'
+        | 'mariadb'
+        | 'cockroachdb'
+        | 'arangodb'
+        | 'neo4j'
+        | 'influxdb'
+        | 'elasticsearch'
+      )[]
+    | null;
+  tools?:
+    | (
+        | 'vite'
+        | 'git'
+        | 'chatgpt'
+        | 'postman'
+        | 'docker'
+        | 'jenkins'
+        | 'circleci'
+        | 'travisci'
+        | 'heroku'
+        | 'ansible'
+        | 'puppet'
+        | 'chef'
+        | 'datadog'
+        | 'prometheus'
+        | 'grafana'
+        | 'kibana'
+        | 'sentry'
+        | 'slack'
+        | 'discord'
+        | 'zapier'
+        | 'ngrok'
+      )[]
+    | null;
+  services?:
+    | (
+        | 'github'
+        | 'bitbucket'
+        | 'figma'
+        | 'trello'
+        | 'vercel'
+        | 'netlify'
+        | 'notion'
+        | 'heroku'
+        | 'googlecloud'
+        | 'firebase'
+        | 'dockerhub'
+        | 'slack'
+        | 'discord'
+        | 'jira'
+        | 'asana'
+        | 'gitlab'
+        | 'circleci'
+        | 'mailchimp'
+        | 'zendesk'
+        | 'zapier'
+        | 'postman'
+      )[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'Stacks';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AboutType".
+ */
+export interface AboutType {
+  aboutHeading?: string | null;
+  aboutDescription?: string | null;
+  profileImage?: (number | null) | Media;
+  aboutYourSelf?: string | null;
+  button?: string | null;
+  buttonPath?: string | null;
+  Details?:
+    | {
+        detailsTitle?: string | null;
+        detailsPoints?:
+          | {
+              detailPoint?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'About';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ExperienceType".
+ */
+export interface ExperienceType {
+  experiencesHeading?: string | null;
+  experiencesDescription?: string | null;
+  experiences?:
+    | {
+        designation?: string | null;
+        location?: string | null;
+        tenure?: string | null;
+        companyName?: string | null;
+        companyLogo?: (number | null) | Media;
+        companyWebsiteUrl?: string | null;
+        aboutYourWork?:
+          | {
+              workDescription?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        techStack?:
+          | {
+              techStackName?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  achievementsHeading?: string | null;
+  achievementsDescription?: string | null;
+  achievements?:
+    | {
+        achievement?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'Experience';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "DetailsType".
  */
 export interface DetailsType {
-  collectionSlug?: ('blogs' | 'tags' | 'users') | null;
+  collectionSlug?: ('blogs' | 'tags' | 'users' | 'projects') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'Details';
@@ -179,7 +395,7 @@ export interface DetailsType {
  */
 export interface ListType {
   title?: string | null;
-  collectionSlug?: ('blogs' | 'tags' | 'users') | null;
+  collectionSlug?: ('blogs' | 'tags' | 'users' | 'projects') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'List';
@@ -452,6 +668,42 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects".
+ */
+export interface Project {
+  id: number;
+  projectType: 'major' | 'minor';
+  projectColor?: ('#FF8A00' | '#18A08B' | '#7373E2' | '#0099FF' | '#FA4000' | '#E100FF' | '#009245') | null;
+  projectName?: string | null;
+  projectImage?: (number | null) | Media;
+  summary?: string | null;
+  projectLinks?:
+    | {
+        serviceIcon?: (number | null) | Media;
+        serviceName?: string | null;
+        projectServiceLink?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  features?:
+    | {
+        feature?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  techStacks?:
+    | {
+        techStack?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "form-submissions".
  */
 export interface FormSubmission {
@@ -519,6 +771,10 @@ export interface PayloadLockedDocument {
         value: number | User;
       } | null)
     | ({
+        relationTo: 'projects';
+        value: number | Project;
+      } | null)
+    | ({
         relationTo: 'forms';
         value: number | Form;
       } | null)
@@ -584,10 +840,95 @@ export interface PagesSelect<T extends boolean = true> {
         Home?:
           | T
           | {
-              heading?: T;
-              subHeading?: T;
-              image?: T;
-              subscribeField?: T;
+              greetText?: T;
+              name?: T;
+              description?: T;
+              profilePicture?: T;
+              socialLinks?:
+                | T
+                | {
+                    socialIcon?: T;
+                    socialIconLink?: T;
+                    id?: T;
+                  };
+              button?: T;
+              buttonPath?: T;
+              id?: T;
+              blockName?: T;
+            };
+        Stacks?:
+          | T
+          | {
+              stacksHeading?: T;
+              stacksDescription?: T;
+              languages?: T;
+              frameworksAndLibraries?: T;
+              databases?: T;
+              tools?: T;
+              services?: T;
+              id?: T;
+              blockName?: T;
+            };
+        About?:
+          | T
+          | {
+              aboutHeading?: T;
+              aboutDescription?: T;
+              profileImage?: T;
+              aboutYourSelf?: T;
+              button?: T;
+              buttonPath?: T;
+              Details?:
+                | T
+                | {
+                    detailsTitle?: T;
+                    detailsPoints?:
+                      | T
+                      | {
+                          detailPoint?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        Experience?:
+          | T
+          | {
+              experiencesHeading?: T;
+              experiencesDescription?: T;
+              experiences?:
+                | T
+                | {
+                    designation?: T;
+                    location?: T;
+                    tenure?: T;
+                    companyName?: T;
+                    companyLogo?: T;
+                    companyWebsiteUrl?: T;
+                    aboutYourWork?:
+                      | T
+                      | {
+                          workDescription?: T;
+                          id?: T;
+                        };
+                    techStack?:
+                      | T
+                      | {
+                          techStackName?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+              achievementsHeading?: T;
+              achievementsDescription?: T;
+              achievements?:
+                | T
+                | {
+                    achievement?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };
@@ -784,6 +1125,41 @@ export interface UsersSelect<T extends boolean = true> {
   _verificationToken?: T;
   loginAttempts?: T;
   lockUntil?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects_select".
+ */
+export interface ProjectsSelect<T extends boolean = true> {
+  projectType?: T;
+  projectColor?: T;
+  projectName?: T;
+  projectImage?: T;
+  summary?: T;
+  projectLinks?:
+    | T
+    | {
+        serviceIcon?: T;
+        serviceName?: T;
+        projectServiceLink?: T;
+        id?: T;
+      };
+  features?:
+    | T
+    | {
+        feature?: T;
+        id?: T;
+      };
+  techStacks?:
+    | T
+    | {
+        techStack?: T;
+        id?: T;
+      };
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

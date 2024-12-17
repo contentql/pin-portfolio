@@ -21,7 +21,7 @@ html {
 }
 
 body {
-  @apply hide-scroll bg-bg-light text-text-black dark:bg-bg-darker dark:text-text-white min-h-screen w-screen px-4 text-base antialiased md:text-lg;
+  @apply hide-scroll min-h-screen w-screen bg-bg-light px-4 text-base text-text-black antialiased dark:bg-bg-darker dark:text-text-white md:text-lg;
 }
 
 /* Hide Scroll bar for components having "hide-scroll" class in their class name */
@@ -40,5 +40,5 @@ body {
 
 /* Additional CSS */
 .input-box {
-  @apply bg-bg-light dark:bg-bg-dark w-full rounded-2xl border-2 border-gray-400 bg-opacity-50 p-2 font-medium tracking-wide caret-primary outline-none dark:border-gray-600 dark:caret-secondary md:p-3 lg:text-xl;
+  @apply w-full rounded-2xl border-2 border-gray-400 bg-bg-light bg-opacity-50 p-2 font-medium tracking-wide caret-primary outline-none dark:border-gray-600 dark:bg-bg-dark dark:caret-secondary md:p-3 lg:text-xl;
 }

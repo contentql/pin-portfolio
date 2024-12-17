@@ -21,6 +21,9 @@ importers:
       '@hookform/resolvers':
         specifier: ^3.4.0
         version: 3.9.1(react-hook-form@7.53.2(react@19.0.0-rc-66855b96-20241106))
+      '@icons-pack/react-simple-icons':
+        specifier: ^9.4.0
+        version: 9.7.0(react@19.0.0-rc-66855b96-20241106)
       '@libsql/client':
         specifier: 0.14.0
         version: 0.14.0
@@ -1271,6 +1274,11 @@ packages:
   '@humanwhocodes/object-schema@2.0.3':
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
     deprecated: Use @eslint/object-schema instead
+
+  '@icons-pack/react-simple-icons@9.7.0':
+    resolution: {integrity: sha512-KvMwsHUD3mZSu5fCS7Jw3xH4mDqK94PcT39MoyBwtdbpyl5JEsB8kMZOInKsuzpIEb4XqSfsJ49K30j8s0uHpg==}
+    peerDependencies:
+      react: ^16.13 || ^17 || ^18
 
   '@img/sharp-darwin-arm64@0.33.5':
     resolution: {integrity: sha512-UT4p+iz/2H4twwAoLCqfA9UH5pI6DggwKEGuaPy7nCVQ8ZsiY5PIcrRvD1DzuY3qYL07NtIQcWnBSY/heikIFQ==}
@@ -6999,6 +7007,10 @@ snapshots:
   '@humanwhocodes/module-importer@1.0.1': {}
 
   '@humanwhocodes/object-schema@2.0.3': {}
+
+  '@icons-pack/react-simple-icons@9.7.0(react@19.0.0-rc-66855b96-20241106)':
+    dependencies:
+      react: 19.0.0-rc-66855b96-20241106
 
   '@img/sharp-darwin-arm64@0.33.5':
     optionalDependencies:

@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss'
 
+/** @type {import('tailwindcss').Config} */
 import { colors } from './src/lib/theme'
 
 const config: Config = {
@@ -10,6 +11,11 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/blocks/**/*.{js,ts,jsx,tsx,mdx}',
     './src/payload/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/providers/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/animation/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/utils/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/lib/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/constants/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     container: {
