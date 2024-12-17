@@ -333,6 +333,19 @@ export interface AboutType {
         id?: string | null;
       }[]
     | null;
+  codeProfiles?:
+    | {
+        Heading?: string | null;
+        codeProfile?:
+          | {
+              codeProfileTitle?: string | null;
+              codeProfileImage?: (number | null) | Media;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'About';
@@ -886,6 +899,19 @@ export interface PagesSelect<T extends boolean = true> {
                       | T
                       | {
                           detailPoint?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+              codeProfiles?:
+                | T
+                | {
+                    Heading?: T;
+                    codeProfile?:
+                      | T
+                      | {
+                          codeProfileTitle?: T;
+                          codeProfileImage?: T;
                           id?: T;
                         };
                     id?: T;
