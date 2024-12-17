@@ -13,7 +13,6 @@ import Button from '@/components/ui/button'
 import Card from '@/components/ui/card'
 import IconList from '@/components/ui/icon-list'
 import PageHeading from '@/components/ui/page-heading'
-import { CODING_PROFILES } from '@/constants/coding-profiles'
 import { getRandomGradient, gradients } from '@/lib/card-hover-gradients'
 
 interface AboutPage extends AboutType {
@@ -72,30 +71,36 @@ const About: React.FC<AboutPage> = ({ params, ...block }) => {
         </Card>
       ))}
 
-      <Card hoverGradient={getRandomGradient()} title='coding profiles'>
-        <div className='flex flex-wrap gap-3'>
-          {CODING_PROFILES?.map((profile, i) => (
-            <Link key={i} href={'/_' + profile?.source} target='_blank'>
-              <motion.div
-                className='flex items-center gap-3 rounded-xl border-2 bg-bg-light p-1.5 pr-5 dark:bg-bg-darker'
-                style={{ borderColor: profile.color }}
-                variants={slideIn('left', 'tween', 50, 0.25 * (i + 1), 0.25)}
-                whileHover={{ scale: 0.95 }}
-                whileTap={{ scale: 0.9 }}>
-                <div className='rounded-lg bg-white p-1.5'>
-                  <profile.Icon
-                    className='size-4 sm:size-5'
-                    color={profile.color}
+      {block?.codeProfiles?.map((codeProfile, index) => (
+        <Card
+          key={index}
+          hoverGradient={getRandomGradient()}
+          title={codeProfile?.Heading}>
+          <div className='flex flex-wrap gap-3'>
+            {codeProfile?.codeProfile?.map((profile, i) => (
+              <Link key={i} href={profile?.codeProfileUrl!} target='_blank'>
+                <motion.div
+                  className='flex items-center gap-3 rounded-xl border-2 bg-bg-light p-1.5 pr-5 dark:bg-bg-darker'
+                  style={{ borderColor: profile?.color! }}
+                  variants={slideIn('left', 'tween', 50, 0.25 * (i + 1), 0.25)}
+                  whileHover={{ scale: 0.95 }}
+                  whileTap={{ scale: 0.9 }}>
+                  <Image
+                    height={1000}
+                    width={1000}
+                    className='size-7 rounded-lg sm:size-8'
+                    alt={(profile?.codeProfileImage as Media)?.alt! || 'Icon'}
+                    src={(profile?.codeProfileImage as Media)?.url!}
                   />
-                </div>
-                <p className='text-sm font-medium tracking-wide md:text-lg'>
-                  {profile?.name}
-                </p>
-              </motion.div>
-            </Link>
-          ))}
-        </div>
-      </Card>
+                  <p className='text-sm font-medium tracking-wide md:text-lg'>
+                    {profile?.codeProfileTitle}
+                  </p>
+                </motion.div>
+              </Link>
+            ))}
+          </div>
+        </Card>
+      ))}
     </PageWrapper>
   )
 }
