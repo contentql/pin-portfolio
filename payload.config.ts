@@ -7,12 +7,15 @@ import { fileURLToPath } from 'url'
 
 import { ResetPassword } from '@/emails/reset-password'
 import { UserAccountVerification } from '@/emails/verify-email'
+import { isAdmin } from '@/payload/access'
 import { blocksConfig } from '@/payload/blocks/blockConfig'
 import { revalidateAuthors } from '@/payload/hooks/revalidateAuthors'
 import { revalidateBlogs } from '@/payload/hooks/revalidateBlogs'
 import { revalidatePages } from '@/payload/hooks/revalidatePages'
+import { revalidateProjects } from '@/payload/hooks/revalidateProjects'
 import { revalidateSiteSettings } from '@/payload/hooks/revalidateSiteSettings'
 import { revalidateTags } from '@/payload/hooks/revalidateTags'
+import { formatSlug } from '@/utils/formatSlug'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -116,6 +119,168 @@ export default cqlConfig({
       fields: [],
       hooks: {
         afterChange: [revalidateTags],
+      },
+    },
+    {
+      slug: 'projects',
+      labels: {
+        singular: 'Project',
+        plural: 'Projects',
+      },
+      access: {
+        read: () => true,
+        create: isAdmin,
+        update: isAdmin,
+        delete: isAdmin,
+      },
+      admin: {
+        useAsTitle: 'projectName',
+      },
+      versions: {
+        drafts: true,
+      },
+      fields: [
+        {
+          name: 'projectType',
+          label: 'Project Type',
+          type: 'radio',
+          options: [
+            {
+              label: 'Major Project',
+              value: 'major',
+            },
+            {
+              label: 'Minor Project',
+              value: 'minor',
+            },
+          ],
+          required: true,
+          defaultValue: 'minor',
+        },
+        {
+          name: 'projectColor',
+          label: 'Project color',
+          type: 'select',
+          options: [
+            {
+              label: 'Orange',
+              value: '#FF8A00',
+            },
+            {
+              label: 'Olive',
+              value: '#18A08B',
+            },
+            {
+              label: 'Violet',
+              value: '#7373E2',
+            },
+            {
+              label: 'Blue',
+              value: '#0099FF',
+            },
+            {
+              label: 'Red',
+              value: '#FA4000',
+            },
+            {
+              label: 'Pink',
+              value: '#E100FF',
+            },
+            {
+              label: 'Green',
+              value: '#009245',
+            },
+          ],
+        },
+        {
+          name: 'projectName',
+          label: 'Project Name',
+          type: 'text',
+        },
+        {
+          name: 'projectImage',
+          label: 'Project Image',
+          type: 'upload',
+          relationTo: 'media',
+        },
+        {
+          name: 'summary',
+          label: 'Summary',
+          type: 'text',
+        },
+        {
+          name: 'projectLinks',
+          label: 'Project Links',
+          type: 'array',
+          fields: [
+            {
+              name: 'serviceIcon',
+              label: 'Service Link',
+              type: 'upload',
+              relationTo: 'media',
+            },
+            {
+              name: 'serviceName',
+              label: 'Service Name',
+              type: 'text',
+            },
+            {
+              name: 'projectServiceLink',
+              label: 'Service Link',
+              type: 'text',
+            },
+          ],
+        },
+        {
+          name: 'features',
+          label: 'Features',
+          type: 'array',
+          fields: [
+            {
+              name: 'feature',
+              label: 'Feature',
+              type: 'text',
+            },
+          ],
+        },
+        {
+          name: 'techStacks',
+          label: 'Tech stacks',
+          type: 'array',
+          fields: [
+            {
+              name: 'techStack',
+              label: 'tech stack',
+              type: 'text',
+            },
+          ],
+        },
+        {
+          name: 'slug',
+          label: 'Slug',
+          type: 'text',
+          index: true,
+          required: false,
+          admin: {
+            description:
+              'Contains only lowercase letters, numbers, and dashes.',
+            position: 'sidebar',
+            components: {
+              Field: {
+                path: '@contentql/core/client#CustomSlugField',
+                clientProps: {
+                  fieldToUse: String('projectName'),
+                },
+              },
+            },
+          },
+          hooks: {
+            beforeValidate: [formatSlug('projectName')],
+          },
+        },
+      ],
+      hooks: {
+        afterChange: [revalidateProjects],
       },
     },
   ],
