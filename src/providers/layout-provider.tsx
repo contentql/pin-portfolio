@@ -17,7 +17,7 @@ const LayoutProvider = ({ children }: { children: ReactNode }) => {
     <ThemeProvider attribute='class' defaultTheme='dark' enableSystem={false}>
       <motion.main
         animate='animate'
-        className='max-w-portfolio relative mx-auto size-full pt-9 md:pt-36'
+        className='relative mx-auto size-full max-w-portfolio pt-9 md:pt-36'
         exit='exit'
         initial='initial'
         variants={pageTransition}>

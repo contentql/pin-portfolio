@@ -4,6 +4,7 @@ import { ReactNode } from 'react'
 
 import { colors } from '@/lib/theme'
 import LayoutProvider from '@/providers/layout-provider'
+import Provider from '@/trpc/Provider'
 
 import './globals.css'
 
@@ -22,7 +23,9 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html lang='en'>
       <body className={outfit.className}>
-        <LayoutProvider>{children}</LayoutProvider>
+        <Provider>
+          <LayoutProvider>{children}</LayoutProvider>
+        </Provider>
       </body>
     </html>
   )

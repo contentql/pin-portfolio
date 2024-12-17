@@ -1,13 +1,3 @@
-import CALCULATOR from 'public/images/projects/calculator.webp'
-import CERTIVITA from 'public/images/projects/certivita.webp'
-import CKRET from 'public/images/projects/ckret.webp'
-import DIGITAL_CLOCK from 'public/images/projects/digital-clock.webp'
-import FILMINGG from 'public/images/projects/filmingg.webp'
-import QUIZZY from 'public/images/projects/quizzy.webp'
-import REGISTRATION_FORM_UI from 'public/images/projects/registration-form-ui.webp'
-import SCRENOO from 'public/images/projects/screnoo.webp'
-import SUDOKU_WIZARD from 'public/images/projects/sudoku-wizard.webp'
-
 import { BOXICONS } from '@/lib/box-icons'
 
 export type TProject = {
@@ -39,7 +29,7 @@ export const MAJOR_PROJECTS: TProject[] = [
   {
     id: 'ckret',
     title: 'Ckret',
-    image: CKRET,
+    image: '/images/projects/ckret.webp',
     color: '#FF8A00',
     summary:
       'Ckret is an anonymous messaging platform. Exchange anonymous questions, feedback, suggestions, dares, and challenges with your friends, families, and coworkers.',
@@ -75,7 +65,7 @@ export const MAJOR_PROJECTS: TProject[] = [
   {
     id: 'quizzy',
     title: 'Quizzy',
-    image: QUIZZY,
+    image: '/images/projects/quizzy.webp',
     color: '#18A08B',
     summary:
       'Quizzy is a platform for online computer science or coding quizzes, as well as learning new topics by watching video content on the platform.',
@@ -111,7 +101,7 @@ export const MAJOR_PROJECTS: TProject[] = [
   {
     id: 'sudoku_wizard',
     title: 'Sudoku Wizard',
-    image: SUDOKU_WIZARD,
+    image: '/images/projects/sudoku-wizard.webp',
     color: '#7373E2',
     summary:
       'Sudoku Wizard is an algorithmic project based on Backtracking Algorithm. This project illustrates the operation of the backtracking algorithm, which is used to solve any sudoku puzzle.',
@@ -135,7 +125,7 @@ export const MAJOR_PROJECTS: TProject[] = [
   {
     id: 'certivita',
     title: 'Certivita',
-    image: CERTIVITA,
+    image: '/images/projects/certivita.webp',
     color: '#0099FF',
     summary:
       'Certivita is an online tool that helps to generate fully customizable personalized certificates.',
@@ -162,7 +152,7 @@ export const MINOR_PROJECTS: TProject[] = [
   {
     id: 'screnoo',
     title: 'Screnoo',
-    image: SCRENOO,
+    image: '/images/projects/screnoo.webp',
     color: '#5EEAD4',
     summary:
       'Screnoo is a PC Screen recorder which helps to record desktop or laptop screen along with system or user audio.',
@@ -186,7 +176,7 @@ export const MINOR_PROJECTS: TProject[] = [
   {
     id: 'filmingg',
     title: 'Filmingg',
-    image: FILMINGG,
+    image: '/images/projects/filmingg.webp',
     color: '#FA4000',
     summary:
       'Filmingg is a Movie searching / guide web application backed up by OMDB API.',
@@ -210,7 +200,7 @@ export const MINOR_PROJECTS: TProject[] = [
   {
     id: 'calculator',
     title: 'Calculator',
-    image: CALCULATOR,
+    image: '/images/projects/calculator.webp',
     color: '#009245',
     summary: 'This is a simple responsive Calculator.',
     links: [
@@ -233,7 +223,7 @@ export const MINOR_PROJECTS: TProject[] = [
   {
     id: 'digital_clock',
     title: 'Digital Clock',
-    image: DIGITAL_CLOCK,
+    image: '/images/projects/digital-clock.webp',
     color: '#C33764',
     summary: 'This is a simple responsive Digital Clock.',
     links: [
@@ -256,7 +246,7 @@ export const MINOR_PROJECTS: TProject[] = [
   {
     id: 'registration_form_ui',
     title: 'Registration Form UI',
-    image: REGISTRATION_FORM_UI,
+    image: '/images/projects/registration-form-ui.webp',
     color: '#E100FF',
     summary:
       'This is a simple front end of a user registration or signup form with glassmorphism styled interface.',

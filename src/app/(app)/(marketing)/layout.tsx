@@ -1,8 +1,6 @@
 import { headers } from 'next/headers'
 
 import Branding from '@/components/Branding'
-import Footer from '@/components/Footer'
-import Navbar from '@/components/Navbar'
 import { serverClient } from '@/trpc/serverClient'
 import { getCurrentUser } from '@/utils/getCurrentUser'
 import { MetadataProvider } from '@/utils/metadataContext'
@@ -15,12 +13,14 @@ const MarketingLayout = async ({ children }: { children: React.ReactNode }) => {
 
   return (
     <MetadataProvider metadata={metadata}>
-      <div className='grid min-h-screen w-full grid-rows-[1fr_auto]'>
-        <Navbar metadata={metadata} user={user} />
-        <main className='container my-20'>{children}</main>
-        <Footer metadata={metadata} />
-        <Branding />
-      </div>
+      {/* <div className='grid min-h-screen w-full grid-rows-[1fr_auto]'>
+        <Navbar metadata={metadata} user={user} /> */}
+      {/* <main> */}
+      {children}
+      {/* </main> */}
+      {/* <Footer metadata={metadata} /> */}
+      <Branding />
+      {/* </div> */}
     </MetadataProvider>
   )
 }

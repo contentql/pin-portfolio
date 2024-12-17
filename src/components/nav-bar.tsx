@@ -5,9 +5,6 @@ import { useTheme } from 'next-themes'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import DARK_MODE from 'public/images/icons/dark-mode.svg'
-import LIGHT_MODE from 'public/images/icons/light-mode.svg'
-import LOGO from 'public/images/icons/logo.svg'
 import { useEffect, useState } from 'react'
 
 import { slideIn } from '@/animation/framer'
@@ -16,12 +13,12 @@ import { cn, getBoxIcon } from '@/utils/functions'
 
 const NavBar = () => {
   return (
-    <div className='bg-bg-light/50 dark:bg-bg-darker/50 fixed inset-x-0 bottom-0 z-50 p-4 backdrop-blur-2xl md:bottom-auto md:top-0 md:p-8'>
+    <div className='fixed inset-x-0 bottom-0 z-50 bg-bg-light/50 p-4 backdrop-blur-2xl dark:bg-bg-darker/50 md:bottom-auto md:top-0 md:p-8'>
       <motion.div
-        className='max-w-portfolio mx-auto flex h-11 items-center justify-between gap-4 sm:gap-10'
+        className='mx-auto flex h-11 max-w-portfolio items-center justify-between gap-4 sm:gap-10'
         variants={slideIn('up', 'tween', 50, 0.01, 0.5)}>
         <HomeButton className='hidden md:block' />
-        <nav className='bg-bg-lighter dark:bg-bg-dark mx-auto my-2 flex size-full items-center justify-between rounded-full px-2 drop-shadow-md md:w-fit md:px-4'>
+        <nav className='mx-auto my-2 flex size-full items-center justify-between rounded-full bg-bg-lighter px-2 drop-shadow-md dark:bg-bg-dark md:w-fit md:px-4'>
           <HomeButton className='mr-2 block md:hidden' />
           {NAV_ITEMS.map(item => (
             <NavItem key={item.iconId} item={item} />
@@ -78,7 +75,7 @@ const HomeButton = ({ className }: { className?: string }) => {
         alt='home'
         className='size-full'
         height={60}
-        src={LOGO}
+        src='/images/icons/logo.svg'
         width={50}
       />
     </Link>
@@ -113,7 +110,11 @@ const ToggleTheme = ({ className }: { className?: string }) => {
         alt='mode'
         className='size-full invert'
         height={60}
-        src={theme === 'light' ? DARK_MODE : LIGHT_MODE}
+        src={
+          theme === 'light'
+            ? '/images/icons/dark-mode.svg'
+            : '/images/icons/light-mode.svg'
+        }
         width={50}
       />
     </button>
