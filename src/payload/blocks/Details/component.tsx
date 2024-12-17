@@ -7,6 +7,7 @@ import { getPayload } from 'payload'
 
 import AuthorDetails from './components/AuthorDetails'
 import BlogDetails from './components/BlogDetails'
+import ProjectDetails from './components/ProjectDetails'
 import TagDetails from './components/TagDetails'
 
 interface DetailsProps extends DetailsType {
@@ -128,6 +129,22 @@ const Details: React.FC<DetailsProps> = async ({ params, ...block }) => {
       if (typeof author === 'object') {
         return <AuthorDetails author={author} blogsData={blogs} />
       }
+    }
+
+    case 'projects': {
+      const { docs: projects = [] } = await unstable_cache(
+        async () =>
+          await payload.find({
+            collection: 'projects',
+            depth: 5,
+            draft: false,
+            limit: 1000,
+          }),
+        ['list', 'projects'],
+        { tags: ['list-projects'] },
+      )()
+      console.log({ projects })
+      return <ProjectDetails projects={projects} />
     }
   }
 }
