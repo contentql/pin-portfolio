@@ -158,39 +158,10 @@ export default cqlConfig({
           defaultValue: 'minor',
         },
         {
-          name: 'projectColor',
-          label: 'Project color',
-          type: 'select',
-          options: [
-            {
-              label: 'Orange',
-              value: '#FF8A00',
-            },
-            {
-              label: 'Olive',
-              value: '#18A08B',
-            },
-            {
-              label: 'Violet',
-              value: '#7373E2',
-            },
-            {
-              label: 'Blue',
-              value: '#0099FF',
-            },
-            {
-              label: 'Red',
-              value: '#FA4000',
-            },
-            {
-              label: 'Pink',
-              value: '#E100FF',
-            },
-            {
-              label: 'Green',
-              value: '#009245',
-            },
-          ],
+          type: 'text',
+          name: 'color',
+          admin: { components: { Field: '@/payload/fields/ColorField' } },
+          required: true,
         },
         {
           name: 'projectName',
@@ -346,6 +317,132 @@ export default cqlConfig({
               admin: {
                 hidden: true,
               },
+            },
+            {
+              name: 'theme',
+              label: 'Theme',
+              fields: [
+                {
+                  type: 'row',
+                  fields: [
+                    // Light theme
+                    {
+                      name: 'light',
+                      type: 'group',
+                      fields: [
+                        {
+                          name: 'primaryColor',
+                          type: 'text',
+                          label: 'Primary Color',
+                          admin: {
+                            components: {
+                              Field: '@/payload/fields/ColorField',
+                            },
+                          },
+                        },
+                        {
+                          name: 'secondaryColor',
+                          type: 'text',
+                          label: 'Secondary Color',
+                          admin: {
+                            components: {
+                              Field: '@/payload/fields/ColorField',
+                            },
+                          },
+                        },
+                        {
+                          name: 'backgroundColor',
+                          type: 'text',
+                          label: 'Background Color',
+                          admin: {
+                            components: {
+                              Field: '@/payload/fields/ColorField',
+                            },
+                          },
+                        },
+                        {
+                          name: 'foregroundColor',
+                          type: 'text',
+                          label: 'Foreground Color',
+                          admin: {
+                            components: {
+                              Field: '@/payload/fields/ColorField',
+                            },
+                          },
+                        },
+                        {
+                          name: 'textColor',
+                          type: 'text',
+                          label: 'Text Color',
+                          admin: {
+                            components: {
+                              Field: '@/payload/fields/ColorField',
+                            },
+                          },
+                        },
+                      ],
+                    },
+
+                    // Dark theme
+                    {
+                      name: 'dark',
+                      type: 'group',
+                      fields: [
+                        {
+                          name: 'primaryColor',
+                          type: 'text',
+                          label: 'Primary Color',
+                          admin: {
+                            components: {
+                              Field: '@/payload/fields/ColorField',
+                            },
+                          },
+                        },
+                        {
+                          name: 'secondaryColor',
+                          type: 'text',
+                          label: 'Secondary Color',
+                          admin: {
+                            components: {
+                              Field: '@/payload/fields/ColorField',
+                            },
+                          },
+                        },
+                        {
+                          name: 'backgroundColor',
+                          type: 'text',
+                          label: 'Background Color',
+                          admin: {
+                            components: {
+                              Field: '@/payload/fields/ColorField',
+                            },
+                          },
+                        },
+                        {
+                          name: 'foregroundColor',
+                          type: 'text',
+                          label: 'Foreground Color',
+                          admin: {
+                            components: {
+                              Field: '@/payload/fields/ColorField',
+                            },
+                          },
+                        },
+                        {
+                          name: 'textColor',
+                          type: 'text',
+                          label: 'Text Color',
+                          admin: {
+                            components: {
+                              Field: '@/payload/fields/ColorField',
+                            },
+                          },
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
             },
           ],
         },

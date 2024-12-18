@@ -35,39 +35,10 @@ const StacksConfig: Block = {
           type: 'array',
           fields: [
             {
+              type: 'text',
               name: 'color',
-              label: 'Color',
-              type: 'select',
-              options: [
-                {
-                  label: 'Orange',
-                  value: '#FF8A00',
-                },
-                {
-                  label: 'Olive',
-                  value: '#18A08B',
-                },
-                {
-                  label: 'Violet',
-                  value: '#7373E2',
-                },
-                {
-                  label: 'Blue',
-                  value: '#0099FF',
-                },
-                {
-                  label: 'Red',
-                  value: '#FA4000',
-                },
-                {
-                  label: 'Pink',
-                  value: '#E100FF',
-                },
-                {
-                  label: 'Green',
-                  value: '#009245',
-                },
-              ],
+              admin: { components: { Field: '@/payload/fields/ColorField' } },
+              required: true,
             },
             {
               name: 'techName',

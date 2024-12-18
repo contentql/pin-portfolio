@@ -198,7 +198,7 @@ export interface StacksType {
         techHeading?: string | null;
         techStacks?:
           | {
-              color?: ('#FF8A00' | '#18A08B' | '#7373E2' | '#0099FF' | '#FA4000' | '#E100FF' | '#009245') | null;
+              color: string;
               techName?: string | null;
               techImage?: (number | null) | Media;
               id?: string | null;
@@ -242,7 +242,7 @@ export interface AboutType {
               codeProfileTitle?: string | null;
               codeProfileUrl?: string | null;
               codeProfileImage?: (number | null) | Media;
-              color?: ('#FF8A00' | '#18A08B' | '#7373E2' | '#0099FF' | '#FA4000' | '#E100FF' | '#009245') | null;
+              color: string;
               id?: string | null;
             }[]
           | null;
@@ -595,7 +595,7 @@ export interface User {
 export interface Project {
   id: number;
   projectType: 'major' | 'minor';
-  projectColor?: ('#FF8A00' | '#18A08B' | '#7373E2' | '#0099FF' | '#FA4000' | '#E100FF' | '#009245') | null;
+  color: string;
   projectName?: string | null;
   projectImage?: (number | null) | Media;
   summary?: string | null;
@@ -1084,7 +1084,7 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface ProjectsSelect<T extends boolean = true> {
   projectType?: T;
-  projectColor?: T;
+  color?: T;
   projectName?: T;
   projectImage?: T;
   summary?: T;
@@ -1422,6 +1422,22 @@ export interface SiteSetting {
     adSenseId?: string | null;
     measurementId?: string | null;
   };
+  theme?: {
+    light?: {
+      primaryColor?: string | null;
+      secondaryColor?: string | null;
+      backgroundColor?: string | null;
+      foregroundColor?: string | null;
+      textColor?: string | null;
+    };
+    dark?: {
+      primaryColor?: string | null;
+      secondaryColor?: string | null;
+      backgroundColor?: string | null;
+      foregroundColor?: string | null;
+      textColor?: string | null;
+    };
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1554,6 +1570,28 @@ export interface SiteSettingsSelect<T extends boolean = true> {
     | {
         adSenseId?: T;
         measurementId?: T;
+      };
+  theme?:
+    | T
+    | {
+        light?:
+          | T
+          | {
+              primaryColor?: T;
+              secondaryColor?: T;
+              backgroundColor?: T;
+              foregroundColor?: T;
+              textColor?: T;
+            };
+        dark?:
+          | T
+          | {
+              primaryColor?: T;
+              secondaryColor?: T;
+              backgroundColor?: T;
+              foregroundColor?: T;
+              textColor?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;

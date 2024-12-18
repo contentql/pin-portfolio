@@ -1,3 +1,4 @@
+import { default as default_35dbeacba5a9a0ce2c5b7d449034d408 } from '@/payload/fields/ColorField'
 import { OverviewComponent as OverviewComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { MetaTitleComponent as MetaTitleComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { MetaDescriptionComponent as MetaDescriptionComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
@@ -73,6 +74,7 @@ import { default as default_fe373fe27f1063cfe032cdbcc74c397a } from '/src/payloa
 import { default as default_d04d5322bc326e90e9d559df021a5610 } from '/src/payload/style/icons/Logo.tsx'
 
 export const importMap = {
+  "@/payload/fields/ColorField#default": default_35dbeacba5a9a0ce2c5b7d449034d408,
   "@payloadcms/plugin-seo/client#OverviewComponent": OverviewComponent_a8a977ebc872c5d5ea7ee689724c0860,
   "@payloadcms/plugin-seo/client#MetaTitleComponent": MetaTitleComponent_a8a977ebc872c5d5ea7ee689724c0860,
   "@payloadcms/plugin-seo/client#MetaDescriptionComponent": MetaDescriptionComponent_a8a977ebc872c5d5ea7ee689724c0860,
