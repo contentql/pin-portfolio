@@ -33,10 +33,7 @@ const About: React.FC<AboutPage> = ({ params, ...block }) => {
             alt={(block?.profileImage as Media)?.alt || 'Profile Image'}
             className='object-cover'
             height={450}
-            src={
-              (block?.profileImage as Media)?.url ||
-              '/images/me/avatar_alt.webp'
-            }
+            src={(block?.profileImage as Media)?.url!}
             width={450}
           />
         </AnimatedBorderCard>

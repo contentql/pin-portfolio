@@ -88,9 +88,9 @@ export interface Page {
         | StacksType
         | AboutType
         | ExperienceType
+        | ContactType
         | DetailsType
         | ListType
-        | NewsletterType
         | FormType
         | DisqusCommentsType
       )[]
@@ -297,6 +297,24 @@ export interface ExperienceType {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactType".
+ */
+export interface ContactType {
+  contactHeading?: string | null;
+  contactDescription?: string | null;
+  contactReasons?:
+    | {
+        reason?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'Contact';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "DetailsType".
  */
 export interface DetailsType {
@@ -318,15 +336,17 @@ export interface ListType {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "NewsletterType".
+ * via the `definition` "FormType".
  */
-export interface NewsletterType {
-  heading: string;
-  description: string;
-  form?: (number | null) | Form;
+export interface FormType {
+  title: string;
+  form: {
+    relationTo: 'forms';
+    value: number | Form;
+  };
   id?: string | null;
   blockName?: string | null;
-  blockType: 'Newsletter';
+  blockType: 'FormBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -452,20 +472,6 @@ export interface Form {
     | null;
   updatedAt: string;
   createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "FormType".
- */
-export interface FormType {
-  title: string;
-  form: {
-    relationTo: 'forms';
-    value: number | Form;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'FormBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -872,6 +878,21 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        Contact?:
+          | T
+          | {
+              contactHeading?: T;
+              contactDescription?: T;
+              contactReasons?:
+                | T
+                | {
+                    reason?: T;
+                    description?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
         Details?:
           | T
           | {
@@ -884,15 +905,6 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               title?: T;
               collectionSlug?: T;
-              id?: T;
-              blockName?: T;
-            };
-        Newsletter?:
-          | T
-          | {
-              heading?: T;
-              description?: T;
-              form?: T;
               id?: T;
               blockName?: T;
             };

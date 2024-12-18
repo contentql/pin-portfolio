@@ -13,6 +13,7 @@ const sitemapGenerationMapping = {
   blogs: serverClient.blog.getAllBlogs(),
   tags: serverClient.tag.getAllTags(),
   users: serverClient.author.getAllAuthors(),
+  projects: serverClient.project.getAllProjects(),
 } as const
 
 export async function GET() {
