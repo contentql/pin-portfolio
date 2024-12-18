@@ -116,7 +116,7 @@ const ProjectDetails = ({ projects }: { projects: Project[] }) => {
             className='h-auto w-full object-cover'
             height={400}
             src={(project?.projectImage as Media)?.url!}
-            style={{ borderColor: project?.projectColor! }}
+            style={{ borderColor: project?.color! }}
             width={800}
           />
         </AnimatedBorderCard>
