@@ -3,6 +3,7 @@
 import { SiteSetting } from '@payload-types'
 import { motion } from 'framer-motion'
 import { ThemeProvider } from 'next-themes'
+import { usePathname } from 'next/navigation'
 import { ReactNode } from 'react'
 import { Toaster } from 'react-hot-toast'
 
@@ -19,6 +20,7 @@ const LayoutProvider = ({
   children: ReactNode
   siteSettingsData: SiteSetting
 }) => {
+  const pathname = usePathname()
   return (
     <MetadataProvider metadata={siteSettingsData}>
       <ThemeProvider attribute='class' defaultTheme='dark' enableSystem={false}>
@@ -34,7 +36,7 @@ const LayoutProvider = ({
 
           {children}
           <Branding />
-          {/* {pathname !== '/' && <p className='h-20 md:h-10' />} */}
+          {pathname !== '/' && <p className='h-20 md:h-10' />}
         </motion.main>
 
         <Toaster
