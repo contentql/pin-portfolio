@@ -2,12 +2,12 @@
 // Always prefer to individually import the required block or JSX in other parts of your application
 // Importing the block components and its configurations
 import { AboutConfig } from './About'
+import { ContactConfig } from './Contact'
 import { DetailsConfig } from './Details'
 import { ExperienceConfig } from './Experience'
 import { FormConfig } from './Form'
 import { HomeConfig } from './Home'
 import { ListConfig } from './List'
-import { NewsletterConfig } from './Newsletter'
 import { StacksConfig } from './Stacks'
 
 // Exporting an object that maps block names (as keys) to their corresponding JSX components (as values)
@@ -20,8 +20,8 @@ export const blocksConfig = [
   StacksConfig,
   AboutConfig,
   ExperienceConfig,
+  ContactConfig,
   DetailsConfig,
   ListConfig,
-  NewsletterConfig,
   FormConfig,
 ]
