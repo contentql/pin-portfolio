@@ -3,6 +3,7 @@ import { Block } from 'payload'
 const AboutConfig: Block = {
   slug: 'About',
   interfaceName: 'AboutType',
+  imageURL: '/images/blocks/about.png',
   labels: {
     singular: 'About Block',
     plural: 'About Blocks',

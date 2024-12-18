@@ -3,6 +3,7 @@ import { Block } from 'payload'
 const ExperienceConfig: Block = {
   slug: 'Experience',
   interfaceName: 'ExperienceType',
+  imageURL: '/images/blocks/experiences.png',
   labels: {
     singular: 'Experiences Block',
     plural: 'Experiences Blocks',

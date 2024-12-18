@@ -3,6 +3,7 @@ import { Block } from 'payload'
 const StacksConfig: Block = {
   slug: 'Stacks',
   interfaceName: 'StacksType',
+  imageURL: '/images/blocks/stacks.png',
   labels: {
     singular: 'Stacks Block',
     plural: 'Stacks Blocks',
