@@ -341,16 +341,6 @@ export default cqlConfig({
                           },
                         },
                         {
-                          name: 'secondaryColor',
-                          type: 'text',
-                          label: 'Secondary Color',
-                          admin: {
-                            components: {
-                              Field: '@/payload/fields/ColorField',
-                            },
-                          },
-                        },
-                        {
                           name: 'backgroundColor',
                           type: 'text',
                           label: 'Background Color',
@@ -392,16 +382,6 @@ export default cqlConfig({
                           name: 'primaryColor',
                           type: 'text',
                           label: 'Primary Color',
-                          admin: {
-                            components: {
-                              Field: '@/payload/fields/ColorField',
-                            },
-                          },
-                        },
-                        {
-                          name: 'secondaryColor',
-                          type: 'text',
-                          label: 'Secondary Color',
                           admin: {
                             components: {
                               Field: '@/payload/fields/ColorField',

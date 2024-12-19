@@ -1,7 +1,6 @@
 import type { Config } from 'tailwindcss'
 
 /** @type {import('tailwindcss').Config} */
-import { colors } from './src/lib/theme'
 
 const config: Config = {
   darkMode: 'class',
@@ -27,7 +26,18 @@ const config: Config = {
     },
     extend: {
       colors: {
-        ...colors,
+        primary: 'hsl(var(--primary))',
+        secondary: 'hsl(var(--secondary))',
+        bg: {
+          light: 'hsl(var(--bg-light))',
+          lighter: 'hsl(var(--bg-lighter))',
+          dark: 'hsl(var(--bg-dark))',
+          darker: 'hsl(var(--bg-darker))',
+        },
+        text: {
+          white: 'hsl(var(--text-white))',
+          black: 'hsl(var(--text-black))',
+        },
       },
       borderRadius: {
         DEFAULT: '0.5rem',
@@ -58,7 +68,7 @@ const config: Config = {
         text: 'text 4s ease infinite',
       },
       boxShadow: {
-        button: `4px 4px 6px ${colors.primary}`,
+        button: `4px 4px 6px var(--primary)`,
       },
       maxWidth: {
         portfolio: '50rem',

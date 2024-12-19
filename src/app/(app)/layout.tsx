@@ -95,6 +95,49 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
+function hexToHsl(hex: string): string {
+  // Remove the hash sign if present
+  hex = hex.replace(/^#/, '')
+
+  // Parse the hex color
+  const r = parseInt(hex.substring(0, 2), 16) / 255
+  const g = parseInt(hex.substring(2, 4), 16) / 255
+  const b = parseInt(hex.substring(4, 6), 16) / 255
+
+  // Find min and max values
+  const max = Math.max(r, g, b)
+  const min = Math.min(r, g, b)
+
+  // Calculate lightness
+  let h = 0,
+    s = 0,
+    // eslint-disable-next-line prefer-const
+    l = (max + min) / 2
+
+  // Calculate saturation
+  if (max !== min) {
+    const d = max - min
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min)
+
+    // Calculate hue
+    switch (max) {
+      case r:
+        h = (g - b) / d + (g < b ? 6 : 0)
+        break
+      case g:
+        h = (b - r) / d + 2
+        break
+      case b:
+        h = (r - g) / d + 4
+        break
+    }
+    h *= 60
+  }
+
+  // Convert to percentages and round
+  return `${Math.round(h)} ${Math.round(s * 100)}% ${Math.round(l * 100)}%`
+}
+
 const RootLayout = async ({ children }: { children: ReactNode }) => {
   const metadata = await getCachedSiteSettings()
   const generalSettings = metadata?.general
@@ -103,8 +146,23 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
     typeof generalSettings?.faviconUrl === 'object'
       ? generalSettings?.faviconUrl?.url!
       : '/favicon.ico'
+
+  const { dark, light } = metadata?.theme || {}
   return (
-    <html lang='en'>
+    <html
+      lang='en'
+      style={
+        {
+          '--primary': hexToHsl(light?.primaryColor || '#c084fc'),
+          '--secondary': hexToHsl(dark?.primaryColor || '#60a5fa'),
+          '--bg-light': hexToHsl(light?.foregroundColor || '#f8fafc'),
+          '--bg-lighter': hexToHsl(light?.backgroundColor || '#e2e8f0'),
+          '--bg-dark': hexToHsl(dark?.foregroundColor || '#0f172a'),
+          '--bg-darker': hexToHsl(dark?.backgroundColor || '#1e293b'),
+          '--text-white': hexToHsl(dark?.textColor || '#FFFAFA'),
+          '--text-black': hexToHsl(light?.textColor || '#0F0F0F'),
+        } as React.CSSProperties & { [key: `--${string}`]: string }
+      }>
       <head>
         <link rel='icon' type='image/x-icon' href={faviconUrl} />
 

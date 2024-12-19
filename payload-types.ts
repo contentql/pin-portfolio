@@ -1425,14 +1425,12 @@ export interface SiteSetting {
   theme?: {
     light?: {
       primaryColor?: string | null;
-      secondaryColor?: string | null;
       backgroundColor?: string | null;
       foregroundColor?: string | null;
       textColor?: string | null;
     };
     dark?: {
       primaryColor?: string | null;
-      secondaryColor?: string | null;
       backgroundColor?: string | null;
       foregroundColor?: string | null;
       textColor?: string | null;
@@ -1578,7 +1576,6 @@ export interface SiteSettingsSelect<T extends boolean = true> {
           | T
           | {
               primaryColor?: T;
-              secondaryColor?: T;
               backgroundColor?: T;
               foregroundColor?: T;
               textColor?: T;
@@ -1587,7 +1584,6 @@ export interface SiteSettingsSelect<T extends boolean = true> {
           | T
           | {
               primaryColor?: T;
-              secondaryColor?: T;
               backgroundColor?: T;
               foregroundColor?: T;
               textColor?: T;
