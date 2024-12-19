@@ -5,7 +5,6 @@ import { useTheme } from 'next-themes'
 import { ReactNode } from 'react'
 
 import { fadeIn } from '@/animation/framer'
-import { colors } from '@/lib/theme'
 import { cn } from '@/utils/functions'
 
 type TAnimatedBorder = {
@@ -20,7 +19,8 @@ const AnimatedBorderCard = ({
   children,
 }: TAnimatedBorder) => {
   const { theme } = useTheme()
-  const midColor = theme === 'dark' ? colors.bg.dark : colors.bg.lighter
+  const midColor =
+    theme === 'dark' ? 'hsl(var(--bg-dark))' : 'hsl(var(--bg-lighter))'
 
   return (
     <motion.div
@@ -36,8 +36,8 @@ const AnimatedBorderCard = ({
       <div
         className='group-hover:animate-pause absolute size-[110vw] animate-[spin_20s_linear_infinite]'
         style={{
-          background: `conic-gradient(${colors.primary} 0deg 160deg, ${midColor} 160deg 180deg, 
-                        ${colors.secondary} 180deg 340deg, ${midColor} 340deg 360deg)`,
+          background: `conic-gradient(hsl(var(--primary)) 0deg 160deg, ${midColor} 160deg 180deg, 
+                  hsl(var(--secondary)) 180deg 340deg, ${midColor} 340deg 360deg)`,
         }}
       />
     </motion.div>

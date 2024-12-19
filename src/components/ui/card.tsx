@@ -5,7 +5,6 @@ import { useTheme } from 'next-themes'
 import { ReactNode, useEffect, useRef } from 'react'
 
 import { fadeIn } from '@/animation/framer'
-import { colors } from '@/lib/theme'
 import { cn } from '@/utils/functions'
 
 type TCard = {
@@ -28,11 +27,12 @@ const Card = ({
   titleClassName,
   wrapperClassName,
   title,
-  hoverGradient
+  hoverGradient,
 }: TCard) => {
   const { theme } = useTheme()
 
-  const cardColor = theme === 'dark' ? colors.bg.dark : colors.bg.lighter
+  const cardColor =
+    theme === 'dark' ? 'hsl(var(--bg-dark))' : 'hsl(var(--bg-lighter))'
   const gradientColor =
     theme === 'dark' ? hoverGradient?.dark : hoverGradient?.light
 
@@ -63,32 +63,29 @@ const Card = ({
     <div
       className={cn(
         'mt-[-18px] flex flex-col-reverse sm:mt-[-22px]',
-        wrapperClassName
-      )}
-    >
+        wrapperClassName,
+      )}>
       <motion.section
         ref={cardRef}
         className={cn(
           'relative overflow-hidden rounded-2xl border-2 bg-bg-lighter p-3 dark:bg-bg-darker',
           {
             'pt-[calc(1.125rem+0.75rem)] sm:pt-[calc(1.375rem+0.75rem)]':
-              !!title
+              !!title,
           },
-          className
+          className,
         )}
         variants={fadeIn('down', 'tween', 25, 0.25 * (i + 1), 0.75)}
         onMouseLeave={mouseLeaveHandler}
-        onMouseMove={mouseMoveHandler as any}
-      >
+        onMouseMove={mouseMoveHandler as any}>
         {children}
       </motion.section>
       {!!title && (
         <h3
           className={cn(
             'z-10 mx-3 flex h-9 w-fit translate-y-[1.125rem] items-center justify-center gap-1 rounded-xl border-2 bg-secondary px-4 text-base font-medium capitalize tracking-wide text-text-black outline-none dark:bg-primary dark:text-text-white sm:h-11 sm:translate-y-[1.375rem] md:text-lg',
-            titleClassName
-          )}
-        >
+            titleClassName,
+          )}>
           {title}
         </h3>
       )}

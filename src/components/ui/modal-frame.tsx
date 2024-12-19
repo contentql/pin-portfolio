@@ -5,7 +5,6 @@ import { useTheme } from 'next-themes'
 import { FC, ReactNode } from 'react'
 
 import { scaleInOut, slideIn } from '@/animation/framer'
-import { colors } from '@/lib/theme'
 import { cn } from '@/utils/functions'
 
 interface ModalFrameProps {
@@ -29,49 +28,46 @@ const ModalFrame: FC<ModalFrameProps> = ({
   dedicatedClose,
   maskClassName,
   title,
-  titleClassName
+  titleClassName,
 }) => {
   const { theme } = useTheme()
   const themedBorderColor =
     color && !defaultBorderColor
       ? color
       : theme === 'dark'
-        ? colors.bg.light
-        : colors.bg.dark
+        ? 'hsl(var(--bg-light))'
+        : 'hsl(var(--bg-dark))'
   return (
     <AnimatePresence>
       <motion.div
         animate={{ opacity: 1 }}
         className={cn(
           'fixed inset-0 z-[100] flex items-center justify-center bg-primary/20 p-4 backdrop-blur-md md:p-8',
-          maskClassName
+          maskClassName,
         )}
         exit={{ opacity: 0 }}
         initial={{ opacity: 0 }}
-        onClick={dedicatedClose ? () => {} : close}
-      >
+        onClick={dedicatedClose ? () => {} : close}>
         <motion.div
-          animate="animate"
+          animate='animate'
           className={cn(
             'hide-scroll relative max-h-full w-full overflow-auto rounded-3xl border-2 bg-bg-light p-3 drop-shadow-2xl dark:bg-bg-dark md:p-5',
-            className
+            className,
           )}
-          exit="exit"
-          initial="initial"
+          exit='exit'
+          initial='initial'
           style={{ borderColor: themedBorderColor }}
           variants={scaleInOut}
-          onClick={(e) => e.stopPropagation()}
-        >
+          onClick={e => e.stopPropagation()}>
           {!!title && (
             <motion.div
               className={cn('absolute inset-x-0 top-0', titleClassName)}
-              style={{ backgroundColor: color || colors.secondary }}
-              variants={slideIn('up', 'tween', 150, 0.1, 0.5)}
-            >
-              <p className="p-2 text-center text-3xl font-semibold uppercase tracking-wide text-black dark:text-white md:text-4xl">
+              style={{ backgroundColor: color || 'hsl(var(--secondary))' }}
+              variants={slideIn('up', 'tween', 150, 0.1, 0.5)}>
+              <p className='p-2 text-center text-3xl font-semibold uppercase tracking-wide text-black dark:text-white md:text-4xl'>
                 {title}
               </p>
-              <span className="block h-10 w-full rounded-t-3xl bg-bg-light dark:bg-bg-dark" />
+              <span className='block h-10 w-full rounded-t-3xl bg-bg-light dark:bg-bg-dark' />
             </motion.div>
           )}
           {children}

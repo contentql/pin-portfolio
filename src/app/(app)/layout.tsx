@@ -8,7 +8,6 @@ import { ReactNode } from 'react'
 
 import GoogleAdsense from '@/components/GoogleAdsense'
 import GoogleAnalytics from '@/components/GoogleAnalytics'
-import { colors } from '@/lib/theme'
 import Provider from '@/trpc/Provider'
 
 import './globals.css'
@@ -21,7 +20,7 @@ const outfit = Outfit({
 })
 
 export const viewport: Viewport = {
-  themeColor: colors.primary,
+  themeColor: 'hsl(var(--primary))',
 }
 
 const getCachedSiteSettings = unstable_cache(

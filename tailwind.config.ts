@@ -68,7 +68,7 @@ const config: Config = {
         text: 'text 4s ease infinite',
       },
       boxShadow: {
-        button: `4px 4px 6px var(--primary)`,
+        button: `4px 4px 6px hsl(var(--primary))`,
       },
       maxWidth: {
         portfolio: '50rem',
