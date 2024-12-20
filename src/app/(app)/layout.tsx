@@ -151,14 +151,14 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
       lang='en'
       style={
         {
-          '--primary': hexToHsl(light?.primaryColor!),
-          '--secondary': hexToHsl(dark?.primaryColor!),
-          '--bg-light': hexToHsl(light?.foregroundColor!),
-          '--bg-lighter': hexToHsl(light?.backgroundColor!),
-          '--bg-dark': hexToHsl(dark?.foregroundColor!),
-          '--bg-darker': hexToHsl(dark?.backgroundColor!),
-          '--text-white': hexToHsl(dark?.textColor!),
-          '--text-black': hexToHsl(light?.textColor!),
+          '--primary': hexToHsl(light?.primaryColor || '#c084fc'),
+          '--secondary': hexToHsl(dark?.primaryColor || '#60a5fa'),
+          '--bg-light': hexToHsl(light?.foregroundColor || '#e2e8f0'),
+          '--bg-lighter': hexToHsl(light?.backgroundColor || '#f8fafc'),
+          '--bg-dark': hexToHsl(dark?.foregroundColor || '#1e293b'),
+          '--bg-darker': hexToHsl(dark?.backgroundColor || '#0f172a'),
+          '--text-white': hexToHsl(dark?.textColor || '#FFFAFA'),
+          '--text-black': hexToHsl(light?.textColor || '#0F0F0F'),
         } as React.CSSProperties & { [key: `--${string}`]: string }
       }>
       <head>
