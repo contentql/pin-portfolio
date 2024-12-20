@@ -759,171 +759,15 @@ export interface PagesSelect<T extends boolean = true> {
   layout?:
     | T
     | {
-        Home?:
-          | T
-          | {
-              greetText?: T;
-              name?: T;
-              description?: T;
-              profilePicture?: T;
-              socialLinks?:
-                | T
-                | {
-                    socialIcon?: T;
-                    socialIconLink?: T;
-                    id?: T;
-                  };
-              button?: T;
-              buttonPath?: T;
-              id?: T;
-              blockName?: T;
-            };
-        Stacks?:
-          | T
-          | {
-              stacksHeading?: T;
-              stacksDescription?: T;
-              technologies?:
-                | T
-                | {
-                    techHeading?: T;
-                    techStacks?:
-                      | T
-                      | {
-                          color?: T;
-                          techName?: T;
-                          techImage?: T;
-                          id?: T;
-                        };
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        About?:
-          | T
-          | {
-              aboutHeading?: T;
-              aboutDescription?: T;
-              profileImage?: T;
-              aboutYourSelf?: T;
-              button?: T;
-              buttonPath?: T;
-              Details?:
-                | T
-                | {
-                    detailsTitle?: T;
-                    detailsPoints?:
-                      | T
-                      | {
-                          detailPoint?: T;
-                          id?: T;
-                        };
-                    id?: T;
-                  };
-              codeProfiles?:
-                | T
-                | {
-                    Heading?: T;
-                    codeProfile?:
-                      | T
-                      | {
-                          codeProfileTitle?: T;
-                          codeProfileUrl?: T;
-                          codeProfileImage?: T;
-                          color?: T;
-                          id?: T;
-                        };
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        Experience?:
-          | T
-          | {
-              experiencesHeading?: T;
-              experiencesDescription?: T;
-              experiences?:
-                | T
-                | {
-                    designation?: T;
-                    location?: T;
-                    tenure?: T;
-                    companyName?: T;
-                    companyLogo?: T;
-                    companyWebsiteUrl?: T;
-                    aboutYourWork?:
-                      | T
-                      | {
-                          workDescription?: T;
-                          id?: T;
-                        };
-                    techStack?:
-                      | T
-                      | {
-                          techStackName?: T;
-                          id?: T;
-                        };
-                    id?: T;
-                  };
-              achievementsHeading?: T;
-              achievementsDescription?: T;
-              achievements?:
-                | T
-                | {
-                    achievement?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        Contact?:
-          | T
-          | {
-              contactHeading?: T;
-              contactDescription?: T;
-              contactReasons?:
-                | T
-                | {
-                    reason?: T;
-                    description?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        Details?:
-          | T
-          | {
-              collectionSlug?: T;
-              id?: T;
-              blockName?: T;
-            };
-        List?:
-          | T
-          | {
-              title?: T;
-              collectionSlug?: T;
-              id?: T;
-              blockName?: T;
-            };
-        FormBlock?:
-          | T
-          | {
-              title?: T;
-              form?: T;
-              id?: T;
-              blockName?: T;
-            };
-        DisqusComments?:
-          | T
-          | {
-              title?: T;
-              shortName?: T;
-              id?: T;
-              blockName?: T;
-            };
+        Home?: T | HomeTypeSelect<T>;
+        Stacks?: T | StacksTypeSelect<T>;
+        About?: T | AboutTypeSelect<T>;
+        Experience?: T | ExperienceTypeSelect<T>;
+        Contact?: T | ContactTypeSelect<T>;
+        Details?: T | DetailsTypeSelect<T>;
+        List?: T | ListTypeSelect<T>;
+        FormBlock?: T | FormTypeSelect<T>;
+        DisqusComments?: T | DisqusCommentsTypeSelect<T>;
       };
   meta?:
     | T
@@ -950,6 +794,189 @@ export interface PagesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeType_select".
+ */
+export interface HomeTypeSelect<T extends boolean = true> {
+  greetText?: T;
+  name?: T;
+  description?: T;
+  profilePicture?: T;
+  socialLinks?:
+    | T
+    | {
+        socialIcon?: T;
+        socialIconLink?: T;
+        id?: T;
+      };
+  button?: T;
+  buttonPath?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StacksType_select".
+ */
+export interface StacksTypeSelect<T extends boolean = true> {
+  stacksHeading?: T;
+  stacksDescription?: T;
+  technologies?:
+    | T
+    | {
+        techHeading?: T;
+        techStacks?:
+          | T
+          | {
+              color?: T;
+              techName?: T;
+              techImage?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AboutType_select".
+ */
+export interface AboutTypeSelect<T extends boolean = true> {
+  aboutHeading?: T;
+  aboutDescription?: T;
+  profileImage?: T;
+  aboutYourSelf?: T;
+  button?: T;
+  buttonPath?: T;
+  Details?:
+    | T
+    | {
+        detailsTitle?: T;
+        detailsPoints?:
+          | T
+          | {
+              detailPoint?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  codeProfiles?:
+    | T
+    | {
+        Heading?: T;
+        codeProfile?:
+          | T
+          | {
+              codeProfileTitle?: T;
+              codeProfileUrl?: T;
+              codeProfileImage?: T;
+              color?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ExperienceType_select".
+ */
+export interface ExperienceTypeSelect<T extends boolean = true> {
+  experiencesHeading?: T;
+  experiencesDescription?: T;
+  experiences?:
+    | T
+    | {
+        designation?: T;
+        location?: T;
+        tenure?: T;
+        companyName?: T;
+        companyLogo?: T;
+        companyWebsiteUrl?: T;
+        aboutYourWork?:
+          | T
+          | {
+              workDescription?: T;
+              id?: T;
+            };
+        techStack?:
+          | T
+          | {
+              techStackName?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  achievementsHeading?: T;
+  achievementsDescription?: T;
+  achievements?:
+    | T
+    | {
+        achievement?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactType_select".
+ */
+export interface ContactTypeSelect<T extends boolean = true> {
+  contactHeading?: T;
+  contactDescription?: T;
+  contactReasons?:
+    | T
+    | {
+        reason?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DetailsType_select".
+ */
+export interface DetailsTypeSelect<T extends boolean = true> {
+  collectionSlug?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ListType_select".
+ */
+export interface ListTypeSelect<T extends boolean = true> {
+  title?: T;
+  collectionSlug?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FormType_select".
+ */
+export interface FormTypeSelect<T extends boolean = true> {
+  title?: T;
+  form?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DisqusCommentsType_select".
+ */
+export interface DisqusCommentsTypeSelect<T extends boolean = true> {
+  title?: T;
+  shortName?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1315,6 +1342,7 @@ export interface SiteSetting {
           menuLink?: {
             type?: ('reference' | 'custom') | null;
             newTab?: boolean | null;
+            icon?: (number | null) | Media;
             label: string;
             page?: {
               relationTo: 'pages';
@@ -1329,6 +1357,7 @@ export interface SiteSetting {
               | {
                   type?: ('reference' | 'custom') | null;
                   newTab?: boolean | null;
+                  icon?: (number | null) | Media;
                   label: string;
                   page?: {
                     relationTo: 'pages';
@@ -1351,6 +1380,7 @@ export interface SiteSetting {
           menuLink?: {
             type?: ('reference' | 'custom') | null;
             newTab?: boolean | null;
+            icon?: (number | null) | Media;
             label: string;
             page?: {
               relationTo: 'pages';
@@ -1365,6 +1395,7 @@ export interface SiteSetting {
               | {
                   type?: ('reference' | 'custom') | null;
                   newTab?: boolean | null;
+                  icon?: (number | null) | Media;
                   label: string;
                   page?: {
                     relationTo: 'pages';
@@ -1409,6 +1440,10 @@ export interface SiteSetting {
       relationTo: 'pages';
       value: number | Page;
     } | null;
+    productLink?: {
+      relationTo: 'pages';
+      value: number | Page;
+    } | null;
     authorLink?: {
       relationTo: 'pages';
       value: number | Page;
@@ -1421,6 +1456,156 @@ export interface SiteSetting {
   monetization?: {
     adSenseId?: string | null;
     measurementId?: string | null;
+  };
+  stripeConnect?: {
+    country?:
+      | (
+          | 'AL'
+          | 'DZ'
+          | 'AO'
+          | 'AG'
+          | 'AR'
+          | 'AM'
+          | 'AU'
+          | 'AT'
+          | 'AZ'
+          | 'BS'
+          | 'BH'
+          | 'BD'
+          | 'BE'
+          | 'BJ'
+          | 'BT'
+          | 'BO'
+          | 'BA'
+          | 'BW'
+          | 'BN'
+          | 'BG'
+          | 'KH'
+          | 'CA'
+          | 'CL'
+          | 'CO'
+          | 'CR'
+          | 'CI'
+          | 'HR'
+          | 'CY'
+          | 'CZ'
+          | 'DK'
+          | 'DO'
+          | 'EC'
+          | 'EG'
+          | 'SV'
+          | 'EE'
+          | 'ET'
+          | 'FI'
+          | 'FR'
+          | 'GA'
+          | 'GM'
+          | 'DE'
+          | 'GH'
+          | 'GR'
+          | 'GT'
+          | 'GY'
+          | 'HK'
+          | 'HU'
+          | 'IS'
+          | 'IN'
+          | 'ID'
+          | 'IE'
+          | 'IL'
+          | 'IT'
+          | 'JM'
+          | 'JP'
+          | 'JO'
+          | 'KZ'
+          | 'KE'
+          | 'KW'
+          | 'LA'
+          | 'LV'
+          | 'LI'
+          | 'LT'
+          | 'LU'
+          | 'MO'
+          | 'MG'
+          | 'MY'
+          | 'MT'
+          | 'MU'
+          | 'MX'
+          | 'MD'
+          | 'MC'
+          | 'MN'
+          | 'MA'
+          | 'MZ'
+          | 'NA'
+          | 'NL'
+          | 'NZ'
+          | 'NE'
+          | 'NG'
+          | 'MK'
+          | 'NO'
+          | 'OM'
+          | 'PK'
+          | 'PA'
+          | 'PY'
+          | 'PE'
+          | 'PH'
+          | 'PL'
+          | 'PT'
+          | 'QA'
+          | 'RO'
+          | 'RW'
+          | 'SM'
+          | 'SA'
+          | 'SN'
+          | 'RS'
+          | 'SG'
+          | 'SK'
+          | 'SI'
+          | 'ZA'
+          | 'KR'
+          | 'ES'
+          | 'LK'
+          | 'LC'
+          | 'SE'
+          | 'CH'
+          | 'TW'
+          | 'TZ'
+          | 'TH'
+          | 'TT'
+          | 'TN'
+          | 'TR'
+          | 'AE'
+          | 'GB'
+          | 'UY'
+          | 'UZ'
+          | 'VN'
+        )
+      | null;
+    currency?:
+      | (
+          | 'usd'
+          | 'eur'
+          | 'inr'
+          | 'gbp'
+          | 'jpy'
+          | 'cad'
+          | 'aud'
+          | 'chf'
+          | 'cny'
+          | 'hkd'
+          | 'sgd'
+          | 'mxn'
+          | 'brl'
+          | 'rub'
+          | 'krw'
+          | 'zar'
+          | 'try'
+          | 'sar'
+          | 'aed'
+          | 'pln'
+        )
+      | null;
+    stripeUserId?: string | null;
+    stripeAdminDashboard?: string | null;
   };
   theme?: {
     light?: {
@@ -1466,13 +1651,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   navbar?:
     | T
     | {
-        logo?:
-          | T
-          | {
-              imageUrl?: T;
-              height?: T;
-              width?: T;
-            };
+        logo?: T | BrandLogoSelect<T>;
         menuLinks?:
           | T
           | {
@@ -1482,6 +1661,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
                 | {
                     type?: T;
                     newTab?: T;
+                    icon?: T;
                     label?: T;
                     page?: T;
                     url?: T;
@@ -1496,6 +1676,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
                       | {
                           type?: T;
                           newTab?: T;
+                          icon?: T;
                           label?: T;
                           page?: T;
                           url?: T;
@@ -1508,14 +1689,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   footer?:
     | T
     | {
-        logo?:
-          | T
-          | {
-              imageUrl?: T;
-              height?: T;
-              width?: T;
-              description?: T;
-            };
+        logo?: T | BrandLogoSelect<T>;
         footerLinks?:
           | T
           | {
@@ -1525,6 +1699,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
                 | {
                     type?: T;
                     newTab?: T;
+                    icon?: T;
                     label?: T;
                     page?: T;
                     url?: T;
@@ -1539,6 +1714,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
                       | {
                           type?: T;
                           newTab?: T;
+                          icon?: T;
                           label?: T;
                           page?: T;
                           url?: T;
@@ -1560,6 +1736,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
     | T
     | {
         blogLink?: T;
+        productLink?: T;
         authorLink?: T;
         tagLink?: T;
       };
@@ -1568,6 +1745,14 @@ export interface SiteSettingsSelect<T extends boolean = true> {
     | {
         adSenseId?: T;
         measurementId?: T;
+      };
+  stripeConnect?:
+    | T
+    | {
+        country?: T;
+        currency?: T;
+        stripeUserId?: T;
+        stripeAdminDashboard?: T;
       };
   theme?:
     | T
@@ -1592,6 +1777,16 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BrandLogo_select".
+ */
+export interface BrandLogoSelect<T extends boolean = true> {
+  imageUrl?: T;
+  height?: T;
+  width?: T;
+  description?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -2216,7 +2216,7 @@
           "type": "integer",
           "primaryKey": true,
           "notNull": true,
-          "autoincrement": true
+          "autoincrement": false
         },
         "order": {
           "name": "order",
@@ -4746,7 +4746,7 @@
           "type": "integer",
           "primaryKey": true,
           "notNull": true,
-          "autoincrement": true
+          "autoincrement": false
         },
         "order": {
           "name": "order",
@@ -5021,7 +5021,7 @@
           "type": "integer",
           "primaryKey": true,
           "notNull": true,
-          "autoincrement": true
+          "autoincrement": false
         },
         "order": {
           "name": "order",
@@ -5392,7 +5392,7 @@
           "type": "integer",
           "primaryKey": true,
           "notNull": true,
-          "autoincrement": true
+          "autoincrement": false
         },
         "order": {
           "name": "order",
@@ -8728,7 +8728,7 @@
           "type": "integer",
           "primaryKey": true,
           "notNull": true,
-          "autoincrement": true
+          "autoincrement": false
         },
         "order": {
           "name": "order",
@@ -8945,7 +8945,7 @@
           "type": "integer",
           "primaryKey": true,
           "notNull": true,
-          "autoincrement": true
+          "autoincrement": false
         },
         "order": {
           "name": "order",
@@ -9331,7 +9331,7 @@
           "type": "integer",
           "primaryKey": true,
           "notNull": true,
-          "autoincrement": true
+          "autoincrement": false
         },
         "order": {
           "name": "order",
@@ -9486,8 +9486,8 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "site_settings_navbar_menu_links_menu_link_group_group_links": {
-      "name": "site_settings_navbar_menu_links_menu_link_group_group_links",
+    "navbarLinks": {
+      "name": "navbarLinks",
       "columns": {
         "_order": {
           "name": "_order",
@@ -9525,6 +9525,13 @@
           "notNull": false,
           "autoincrement": false
         },
+        "icon_id": {
+          "name": "icon_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
         "label": {
           "name": "label",
           "type": "text",
@@ -9541,26 +9548,46 @@
         }
       },
       "indexes": {
-        "site_settings_navbar_menu_links_menu_link_group_group_links_order_idx": {
-          "name": "site_settings_navbar_menu_links_menu_link_group_group_links_order_idx",
+        "navbarLinks_order_idx": {
+          "name": "navbarLinks_order_idx",
           "columns": [
             "_order"
           ],
           "isUnique": false
         },
-        "site_settings_navbar_menu_links_menu_link_group_group_links_parent_id_idx": {
-          "name": "site_settings_navbar_menu_links_menu_link_group_group_links_parent_id_idx",
+        "navbarLinks_parent_id_idx": {
+          "name": "navbarLinks_parent_id_idx",
           "columns": [
             "_parent_id"
+          ],
+          "isUnique": false
+        },
+        "navbarLinks_icon_idx": {
+          "name": "navbarLinks_icon_idx",
+          "columns": [
+            "icon_id"
           ],
           "isUnique": false
         }
       },
       "foreignKeys": {
-        "site_settings_navbar_menu_links_menu_link_group_group_links_parent_id_fk": {
-          "name": "site_settings_navbar_menu_links_menu_link_group_group_links_parent_id_fk",
-          "tableFrom": "site_settings_navbar_menu_links_menu_link_group_group_links",
-          "tableTo": "site_settings_navbar_menu_links",
+        "navbarLinks_icon_id_media_id_fk": {
+          "name": "navbarLinks_icon_id_media_id_fk",
+          "tableFrom": "navbarLinks",
+          "tableTo": "media",
+          "columnsFrom": [
+            "icon_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "navbarLinks_parent_id_fk": {
+          "name": "navbarLinks_parent_id_fk",
+          "tableFrom": "navbarLinks",
+          "tableTo": "navbarMenu",
           "columnsFrom": [
             "_parent_id"
           ],
@@ -9575,8 +9602,8 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "site_settings_navbar_menu_links": {
-      "name": "site_settings_navbar_menu_links",
+    "navbarMenu": {
+      "name": "navbarMenu",
       "columns": {
         "_order": {
           "name": "_order",
@@ -9622,6 +9649,13 @@
           "notNull": false,
           "autoincrement": false
         },
+        "menu_link_icon_id": {
+          "name": "menu_link_icon_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
         "menu_link_label": {
           "name": "menu_link_label",
           "type": "text",
@@ -9645,25 +9679,45 @@
         }
       },
       "indexes": {
-        "site_settings_navbar_menu_links_order_idx": {
-          "name": "site_settings_navbar_menu_links_order_idx",
+        "navbarMenu_order_idx": {
+          "name": "navbarMenu_order_idx",
           "columns": [
             "_order"
           ],
           "isUnique": false
         },
-        "site_settings_navbar_menu_links_parent_id_idx": {
-          "name": "site_settings_navbar_menu_links_parent_id_idx",
+        "navbarMenu_parent_id_idx": {
+          "name": "navbarMenu_parent_id_idx",
           "columns": [
             "_parent_id"
+          ],
+          "isUnique": false
+        },
+        "navbarMenu_menu_link_menu_link_icon_idx": {
+          "name": "navbarMenu_menu_link_menu_link_icon_idx",
+          "columns": [
+            "menu_link_icon_id"
           ],
           "isUnique": false
         }
       },
       "foreignKeys": {
-        "site_settings_navbar_menu_links_parent_id_fk": {
-          "name": "site_settings_navbar_menu_links_parent_id_fk",
-          "tableFrom": "site_settings_navbar_menu_links",
+        "navbarMenu_menu_link_icon_id_media_id_fk": {
+          "name": "navbarMenu_menu_link_icon_id_media_id_fk",
+          "tableFrom": "navbarMenu",
+          "tableTo": "media",
+          "columnsFrom": [
+            "menu_link_icon_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "navbarMenu_parent_id_fk": {
+          "name": "navbarMenu_parent_id_fk",
+          "tableFrom": "navbarMenu",
           "tableTo": "site_settings",
           "columnsFrom": [
             "_parent_id"
@@ -9679,8 +9733,8 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "site_settings_footer_footer_links_menu_link_group_group_links": {
-      "name": "site_settings_footer_footer_links_menu_link_group_group_links",
+    "footerLinks": {
+      "name": "footerLinks",
       "columns": {
         "_order": {
           "name": "_order",
@@ -9718,6 +9772,13 @@
           "notNull": false,
           "autoincrement": false
         },
+        "icon_id": {
+          "name": "icon_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
         "label": {
           "name": "label",
           "type": "text",
@@ -9734,26 +9795,46 @@
         }
       },
       "indexes": {
-        "site_settings_footer_footer_links_menu_link_group_group_links_order_idx": {
-          "name": "site_settings_footer_footer_links_menu_link_group_group_links_order_idx",
+        "footerLinks_order_idx": {
+          "name": "footerLinks_order_idx",
           "columns": [
             "_order"
           ],
           "isUnique": false
         },
-        "site_settings_footer_footer_links_menu_link_group_group_links_parent_id_idx": {
-          "name": "site_settings_footer_footer_links_menu_link_group_group_links_parent_id_idx",
+        "footerLinks_parent_id_idx": {
+          "name": "footerLinks_parent_id_idx",
           "columns": [
             "_parent_id"
+          ],
+          "isUnique": false
+        },
+        "footerLinks_icon_idx": {
+          "name": "footerLinks_icon_idx",
+          "columns": [
+            "icon_id"
           ],
           "isUnique": false
         }
       },
       "foreignKeys": {
-        "site_settings_footer_footer_links_menu_link_group_group_links_parent_id_fk": {
-          "name": "site_settings_footer_footer_links_menu_link_group_group_links_parent_id_fk",
-          "tableFrom": "site_settings_footer_footer_links_menu_link_group_group_links",
-          "tableTo": "site_settings_footer_footer_links",
+        "footerLinks_icon_id_media_id_fk": {
+          "name": "footerLinks_icon_id_media_id_fk",
+          "tableFrom": "footerLinks",
+          "tableTo": "media",
+          "columnsFrom": [
+            "icon_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "footerLinks_parent_id_fk": {
+          "name": "footerLinks_parent_id_fk",
+          "tableFrom": "footerLinks",
+          "tableTo": "FooterMenu",
           "columnsFrom": [
             "_parent_id"
           ],
@@ -9768,8 +9849,8 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "site_settings_footer_footer_links": {
-      "name": "site_settings_footer_footer_links",
+    "FooterMenu": {
+      "name": "FooterMenu",
       "columns": {
         "_order": {
           "name": "_order",
@@ -9815,6 +9896,13 @@
           "notNull": false,
           "autoincrement": false
         },
+        "menu_link_icon_id": {
+          "name": "menu_link_icon_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
         "menu_link_label": {
           "name": "menu_link_label",
           "type": "text",
@@ -9838,25 +9926,45 @@
         }
       },
       "indexes": {
-        "site_settings_footer_footer_links_order_idx": {
-          "name": "site_settings_footer_footer_links_order_idx",
+        "FooterMenu_order_idx": {
+          "name": "FooterMenu_order_idx",
           "columns": [
             "_order"
           ],
           "isUnique": false
         },
-        "site_settings_footer_footer_links_parent_id_idx": {
-          "name": "site_settings_footer_footer_links_parent_id_idx",
+        "FooterMenu_parent_id_idx": {
+          "name": "FooterMenu_parent_id_idx",
           "columns": [
             "_parent_id"
+          ],
+          "isUnique": false
+        },
+        "FooterMenu_menu_link_menu_link_icon_idx": {
+          "name": "FooterMenu_menu_link_menu_link_icon_idx",
+          "columns": [
+            "menu_link_icon_id"
           ],
           "isUnique": false
         }
       },
       "foreignKeys": {
-        "site_settings_footer_footer_links_parent_id_fk": {
-          "name": "site_settings_footer_footer_links_parent_id_fk",
-          "tableFrom": "site_settings_footer_footer_links",
+        "FooterMenu_menu_link_icon_id_media_id_fk": {
+          "name": "FooterMenu_menu_link_icon_id_media_id_fk",
+          "tableFrom": "FooterMenu",
+          "tableTo": "media",
+          "columnsFrom": [
+            "menu_link_icon_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "FooterMenu_parent_id_fk": {
+          "name": "FooterMenu_parent_id_fk",
+          "tableFrom": "FooterMenu",
           "tableTo": "site_settings",
           "columnsFrom": [
             "_parent_id"
@@ -10054,6 +10162,34 @@
           "notNull": false,
           "autoincrement": false
         },
+        "stripe_connect_country": {
+          "name": "stripe_connect_country",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "stripe_connect_currency": {
+          "name": "stripe_connect_currency",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "stripe_connect_stripe_user_id": {
+          "name": "stripe_connect_stripe_user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "stripe_connect_stripe_admin_dashboard": {
+          "name": "stripe_connect_stripe_admin_dashboard",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
         "theme_light_primary_color": {
           "name": "theme_light_primary_color",
           "type": "text",
@@ -10229,7 +10365,7 @@
           "type": "integer",
           "primaryKey": true,
           "notNull": true,
-          "autoincrement": true
+          "autoincrement": false
         },
         "order": {
           "name": "order",
@@ -10297,7 +10433,7 @@
           "type": "integer",
           "primaryKey": true,
           "notNull": true,
-          "autoincrement": true
+          "autoincrement": false
         },
         "order": {
           "name": "order",
@@ -10400,6 +10536,6 @@
   "internal": {
     "indexes": {}
   },
-  "id": "51192c74-cd97-4b53-92a1-a9872aeff4a3",
+  "id": "db8c4e6a-584f-459a-b4c4-25f120ed2b5e",
   "prevId": "00000000-0000-0000-0000-000000000000"
 }
