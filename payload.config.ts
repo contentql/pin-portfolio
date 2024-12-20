@@ -19,8 +19,6 @@ import { formatSlug } from '@/utils/formatSlug'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-const isProduction = process.env.NODE_ENV === 'production'
-
 export default cqlConfig({
   admin: {
     components: {
@@ -44,8 +42,6 @@ export default cqlConfig({
     3. push code, migrations will be applied on the production db
     4. then uncomment the following, to sync data
   */
-  dbURI: isProduction ? env.DATABASE_URI : undefined,
-  dbSecret: isProduction ? env.DATABASE_SECRET : undefined,
 
   s3: {
     accessKeyId: env.S3_ACCESS_KEY_ID,
