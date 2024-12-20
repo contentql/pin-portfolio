@@ -96,7 +96,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 function hexToHsl(hex: string): string {
   // Remove the hash sign if present
-  hex = hex.replace(/^#/, '')
+  hex = hex?.replace(/^#/, '')
 
   // Parse the hex color
   const r = parseInt(hex.substring(0, 2), 16) / 255
