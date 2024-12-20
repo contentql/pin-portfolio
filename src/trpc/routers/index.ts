@@ -1,23 +1,15 @@
 import { router } from '@/trpc'
-import { authorRouter } from '@/trpc/routers/author'
-import { blogRouter } from '@/trpc/routers/blog'
 import { pageRouter } from '@/trpc/routers/page'
 import { siteSettingsRouter } from '@/trpc/routers/site-settings'
-import { tagRouter } from '@/trpc/routers/tag'
 
-import { authRouter } from './auth'
 import { formRouter } from './form'
 import { projectRouter } from './project'
 import { searchRouter } from './search'
 import { userRouter } from './user/user-route'
 
 export const appRouter = router({
-  auth: authRouter,
   page: pageRouter,
-  blog: blogRouter,
   siteSettings: siteSettingsRouter,
-  tag: tagRouter,
-  author: authorRouter,
   user: userRouter,
   project: projectRouter,
   // this is used for global search

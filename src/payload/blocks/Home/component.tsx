@@ -10,7 +10,6 @@ import PageWrapper from '@/components/common/page-wrapper'
 import AnimatedBorderCard from '@/components/ui/animated-border-card'
 import Button from '@/components/ui/button'
 import SocialIcon from '@/components/ui/social-icon'
-import { METADATA } from '@/constants/meta'
 import { SOCIALS } from '@/constants/socials'
 import { cn } from '@/utils/functions'
 
@@ -74,8 +73,6 @@ const Home: React.FC<HomeProps> = ({ params, ...block }) => {
         link={`/${block?.buttonPath}`}>
         {block?.button}
       </Button>
-
-      <span className='sr-only'>{METADATA.description}</span>
     </PageWrapper>
   )
 }

@@ -5,16 +5,11 @@ import { slateEditor } from '@payloadcms/richtext-slate'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
-import { ResetPassword } from '@/emails/reset-password'
-import { UserAccountVerification } from '@/emails/verify-email'
 import { isAdmin } from '@/payload/access'
 import { blocksConfig } from '@/payload/blocks/blockConfig'
-import { revalidateAuthors } from '@/payload/hooks/revalidateAuthors'
-import { revalidateBlogs } from '@/payload/hooks/revalidateBlogs'
 import { revalidatePages } from '@/payload/hooks/revalidatePages'
 import { revalidateProjects } from '@/payload/hooks/revalidateProjects'
 import { revalidateSiteSettings } from '@/payload/hooks/revalidateSiteSettings'
-import { revalidateTags } from '@/payload/hooks/revalidateTags'
 import { formatSlug } from '@/utils/formatSlug'
 
 const filename = fileURLToPath(import.meta.url)
@@ -65,60 +60,10 @@ export default cqlConfig({
 
   collections: [
     {
-      slug: collectionSlug.users,
-      fields: [
-        {
-          name: 'bio',
-          type: 'text',
-          admin: {
-            description: 'This bio will be shown in the authors details page',
-          },
-        },
-      ],
-      auth: {
-        verify: {
-          generateEmailHTML: ({ token, user }) => {
-            return UserAccountVerification({
-              actionLabel: 'verify your account',
-              buttonText: 'Verify Account',
-              userName: user.username,
-              image: user.avatar,
-              href: `${env.PAYLOAD_URL}/verify-email?token=${token}&id=${user.id}`,
-            })
-          },
-        },
-        forgotPassword: {
-          generateEmailHTML: args => {
-            return ResetPassword({
-              resetPasswordLink: `${env.PAYLOAD_URL}/reset-password?token=${args?.token}`,
-              userFirstName: args?.user.username,
-            })
-          },
-        },
-      },
-      hooks: {
-        afterChange: [revalidateAuthors],
-      },
-    },
-    {
       slug: collectionSlug.pages,
       fields: [],
       hooks: {
         afterChange: [revalidatePages],
-      },
-    },
-    {
-      slug: collectionSlug.blogs,
-      fields: [],
-      hooks: {
-        afterChange: [revalidateBlogs],
-      },
-    },
-    {
-      slug: collectionSlug.tags,
-      fields: [],
-      hooks: {
-        afterChange: [revalidateTags],
       },
     },
     {

@@ -208,9 +208,6 @@ export async function generateMetadata({
 
 // generate static-pages
 const staticGenerationMapping = {
-  blogs: serverClient.blog.getAllBlogs(),
-  tags: serverClient.tag.getAllTags(),
-  users: serverClient.author.getAllAuthors(),
   projects: serverClient.project.getAllProjects(),
 } as const
 
