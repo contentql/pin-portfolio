@@ -40,6 +40,7 @@ export default cqlConfig({
 
   dbURI: !isDevelopment ? env.DATABASE_URI : undefined,
   dbSecret: !isDevelopment ? env.DATABASE_URI : undefined,
+  // sync: false,
 
   db: isDevelopment
     ? sqliteAdapter({
