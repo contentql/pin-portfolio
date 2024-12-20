@@ -1,5 +1,6 @@
 import { collectionSlug, cqlConfig } from '@contentql/core'
 import { env } from '@env'
+import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import { slateEditor } from '@payloadcms/richtext-slate'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -19,6 +20,8 @@ import { formatSlug } from '@/utils/formatSlug'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+const isDevelopment = process.env.NODE_ENV === 'development'
+
 export default cqlConfig({
   admin: {
     components: {
@@ -35,14 +38,19 @@ export default cqlConfig({
 
   secret: env.PAYLOAD_SECRET,
 
-  // when doing anything related to collections or collection creation, comment these.
-  /* 
-    1. update or create collection
-    2. create migration
-    3. push code, migrations will be applied on the production db
-    4. then uncomment the following, to sync data
-  */
+  dbURI: !isDevelopment ? env.DATABASE_URI : undefined,
+  dbSecret: !isDevelopment ? env.DATABASE_URI : undefined,
 
+  db: isDevelopment
+    ? sqliteAdapter({
+        client: {
+          url: 'file:data/payload.db',
+          authToken: env.DATABASE_SECRET,
+          syncUrl: env.DATABASE_URI,
+          syncInterval: 60,
+        },
+      })
+    : undefined,
   s3: {
     accessKeyId: env.S3_ACCESS_KEY_ID,
     bucket: env.S3_BUCKET,
