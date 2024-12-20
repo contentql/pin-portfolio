@@ -334,6 +334,7 @@ export default cqlConfig({
                           name: 'primaryColor',
                           type: 'text',
                           label: 'Primary Color',
+                          defaultValue: '#C084FC',
                           admin: {
                             components: {
                               Field: '@/payload/fields/ColorField',
@@ -344,6 +345,7 @@ export default cqlConfig({
                           name: 'backgroundColor',
                           type: 'text',
                           label: 'Background Color',
+                          defaultValue: '#F8FAFC',
                           admin: {
                             components: {
                               Field: '@/payload/fields/ColorField',
@@ -354,6 +356,7 @@ export default cqlConfig({
                           name: 'foregroundColor',
                           type: 'text',
                           label: 'Foreground Color',
+                          defaultValue: '#E2E8F0',
                           admin: {
                             components: {
                               Field: '@/payload/fields/ColorField',
@@ -364,6 +367,7 @@ export default cqlConfig({
                           name: 'textColor',
                           type: 'text',
                           label: 'Text Color',
+                          defaultValue: '#0F0F0F',
                           admin: {
                             components: {
                               Field: '@/payload/fields/ColorField',
@@ -382,6 +386,7 @@ export default cqlConfig({
                           name: 'primaryColor',
                           type: 'text',
                           label: 'Primary Color',
+                          defaultValue: '#60A5FA',
                           admin: {
                             components: {
                               Field: '@/payload/fields/ColorField',
@@ -392,6 +397,7 @@ export default cqlConfig({
                           name: 'backgroundColor',
                           type: 'text',
                           label: 'Background Color',
+                          defaultValue: '#0F172A',
                           admin: {
                             components: {
                               Field: '@/payload/fields/ColorField',
@@ -402,6 +408,7 @@ export default cqlConfig({
                           name: 'foregroundColor',
                           type: 'text',
                           label: 'Foreground Color',
+                          defaultValue: '#1E293B',
                           admin: {
                             components: {
                               Field: '@/payload/fields/ColorField',
@@ -412,6 +419,7 @@ export default cqlConfig({
                           name: 'textColor',
                           type: 'text',
                           label: 'Text Color',
+                          defaultValue: '#FFFAFA',
                           admin: {
                             components: {
                               Field: '@/payload/fields/ColorField',
