@@ -1,4 +1,4 @@
-import { SiteSetting } from '@payload-types'
+import { Media, SiteSetting } from '@payload-types'
 
 type MenuLinksType = NonNullable<
   Pick<SiteSetting, 'navbar'>['navbar']['menuLinks']
@@ -14,6 +14,7 @@ export type GenerateMenuLinksType = {
   }[]
   newTab?: boolean
   href?: string
+  icon?: (number | null) | Media
 }
 
 // ? generateMenuLinks function returns a structure like this to simplify navbar & footer links structure👇
@@ -58,7 +59,7 @@ export const generateMenuLinks = (
         // mapping through the menLinkGroup field
         children:
           menuLinkGroup.groupLinks?.map(
-            ({ label, newTab, type, page, url }) => {
+            ({ label, newTab, type, page, url, icon }) => {
               let pageLink = ''
 
               if (typeof page?.value === 'object') {
@@ -69,6 +70,7 @@ export const generateMenuLinks = (
                 label,
                 newTab: typeof newTab === 'boolean' ? newTab : false,
                 href: type === 'reference' ? pageLink : url!,
+                icon: icon,
               }
             },
           ) || [],
@@ -86,6 +88,7 @@ export const generateMenuLinks = (
         label: menuLink.label,
         newTab: typeof menuLink.newTab === 'boolean' ? menuLink.newTab : false,
         href: menuLink.type === 'reference' ? pageLink : menuLink.url!,
+        icon: menuLink?.icon,
       }
     }
     // to avoid type error passing mandatory parameters

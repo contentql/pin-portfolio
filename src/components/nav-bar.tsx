@@ -1,6 +1,6 @@
 'use client'
 
-import { SiteSetting } from '@payload-types'
+import { Media, SiteSetting } from '@payload-types'
 import { motion } from 'framer-motion'
 import { useTheme } from 'next-themes'
 import Image from 'next/image'
@@ -49,6 +49,7 @@ const NavBar = ({ siteSettingsData }: { siteSettingsData: SiteSetting }) => {
                   label={navlink?.label}
                   href={navlink?.href!}
                   target={navlink?.type ? '_blank' : '_self'}
+                  icon={navlink?.icon!}
                 />
               ),
           )}
@@ -64,6 +65,7 @@ export default NavBar
 
 // Components
 const NavItem = ({
+  icon,
   item,
   href,
   target,
@@ -73,6 +75,7 @@ const NavItem = ({
   href: string
   target: string
   label: string
+  icon?: (number | null) | Media
 }) => {
   // const { iconId, link } = item
   // Check if the current route matches the link
@@ -92,6 +95,13 @@ const NavItem = ({
       {/* <i
         className={`${getBoxIcon(label)} text-2xl transition-colors duration-300 ease-in-out group-hover:text-primary dark:group-hover:text-secondary md:hidden`}
       /> */}
+      <Image
+        src={(icon as Media)?.url!} // Adjust the function to return the correct image path or URL
+        alt={(icon as Media)?.alt || 'icon'}
+        width={32} // Set the width to match your design
+        height={32} // Set the height to match your design
+        className='text-2xl transition-colors duration-300 ease-in-out group-hover:text-primary dark:group-hover:text-secondary md:hidden'
+      />
       <p className='hidden text-lg font-semibold capitalize tracking-wider transition-colors duration-300 ease-in-out group-hover:text-primary dark:group-hover:text-secondary md:block'>
         {label}
       </p>
