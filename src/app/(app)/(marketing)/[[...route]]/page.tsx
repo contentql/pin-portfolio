@@ -209,6 +209,9 @@ export async function generateMetadata({
 // generate static-pages
 const staticGenerationMapping = {
   projects: serverClient.project.getAllProjects(),
+  blogs: serverClient.blog.getAllBlogs(),
+  tags: serverClient.tag.getAllTags(),
+  users: serverClient.author.getAllAuthors(),
 } as const
 
 export async function generateStaticParams(): Promise<StaticRoute[]> {

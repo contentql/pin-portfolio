@@ -1,8 +1,6 @@
-import { BOXICONS } from '@/lib/box-icons'
-
 export type TSocial = {
   source: string
-  iconId: keyof typeof BOXICONS
+  iconId: string
   css: string
 }
 

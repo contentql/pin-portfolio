@@ -9,7 +9,6 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 import { slideIn } from '@/animation/framer'
-import { TNavItem } from '@/constants/nav-items'
 import { cn } from '@/utils/functions'
 import { generateMenuLinks } from '@/utils/generateMenuLinks'
 
@@ -64,12 +63,10 @@ export default NavBar
 
 // Components
 const NavItem = ({
-  item,
   href,
   target,
   label,
 }: {
-  item?: TNavItem
   href: string
   target: string
   label: string
