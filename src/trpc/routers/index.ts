@@ -9,6 +9,7 @@ import { authRouter } from './auth'
 import { formRouter } from './form'
 import { projectRouter } from './project'
 import { searchRouter } from './search'
+import { seedRouter } from './seed'
 import { userRouter } from './user/user-route'
 
 export const appRouter = router({
@@ -20,6 +21,7 @@ export const appRouter = router({
   author: authorRouter,
   user: userRouter,
   project: projectRouter,
+  seed: seedRouter,
   // this is used for global search
   search: searchRouter,
   form: formRouter,

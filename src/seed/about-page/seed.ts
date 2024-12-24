@@ -2,18 +2,34 @@ import configPromise from '@payload-config'
 import { Ora } from 'ora'
 import { RequiredDataFromCollectionSlug, getPayload } from 'payload'
 
-import { aboutPageData, aboutPageProfileImageData } from './data'
+import { aboutPageData, aboutPageImageData } from './data'
 
 const payload = await getPayload({ config: configPromise })
 
 const seed = async (spinner: Ora): Promise<any> => {
   try {
     spinner.start(`Started created home-page...`)
-    const aboutHeroProfileSeedResult = await payload.create({
-      collection: 'media',
-      data: { alt: aboutPageProfileImageData?.alt },
-      filePath: aboutPageProfileImageData?.filePath,
-    })
+    const aboutPageImageSeedResult = await Promise.allSettled(
+      aboutPageImageData.map(image =>
+        payload.create({
+          collection: 'media',
+          data: {
+            alt: image.alt,
+          },
+          filePath: image.filePath,
+        }),
+      ),
+    )
+
+    const formattedImagesResult = aboutPageImageSeedResult
+      .map(result =>
+        result.status === 'fulfilled'
+          ? result.value
+          : `Failed to seed: ${result.reason}`,
+      )
+      .filter(result => typeof result !== 'string')
+
+    let imageIndex = 0
 
     const aboutResult: RequiredDataFromCollectionSlug<'pages'> = {
       ...aboutPageData,
@@ -21,7 +37,17 @@ const seed = async (spinner: Ora): Promise<any> => {
         if (block?.blockType === 'About') {
           return {
             ...block,
-            profilePicture: aboutHeroProfileSeedResult.id,
+            profileImage: formattedImagesResult.at(imageIndex)?.id,
+            codeProfiles: block?.codeProfiles?.map(codeProfileData => ({
+              ...codeProfileData,
+              codeProfile: codeProfileData?.codeProfile?.map(profile => {
+                imageIndex++
+                return {
+                  ...profile,
+                  codeProfileImage: formattedImagesResult.at(imageIndex)?.id,
+                }
+              }),
+            })),
           }
         }
 

@@ -132,6 +132,14 @@ const ProjectDetails = ({ projects }: { projects: Project[] }) => {
             <Fragment key={i}>
               <div className='flex h-full items-center gap-2 rounded-lg bg-bg-light px-3 py-1 dark:bg-bg-darker'>
                 {/* <i className={`${getBoxIcon(iconId)} bx-sm pt-px`} /> */}
+                <Image
+                  src={(link?.serviceIcon as Media)?.url!}
+                  alt='Icon'
+                  className='bx-sm h-6 w-6 pt-px'
+                  width={24}
+                  height={24}
+                  priority // Optional: For optimizing loading
+                />
                 <p className='hidden font-medium capitalize sm:block'>
                   {link?.serviceName}
                 </p>

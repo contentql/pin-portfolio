@@ -10,13 +10,6 @@ const payload = await getPayload({ config: configPromise })
 const seed = async (spinner: Ora): Promise<(string | Project)[]> => {
   try {
     spinner.start(`Started created projects...`)
-    const { docs: tags, totalDocs: totalTags } = await payload.find({
-      collection: 'tags',
-    })
-
-    const { docs: authors, totalDocs: totalAuthors } = await payload.find({
-      collection: 'users',
-    })
 
     const imagesResult = await Promise.allSettled(
       projectsImagesData.map(projectImageData =>
@@ -42,20 +35,19 @@ const seed = async (spinner: Ora): Promise<(string | Project)[]> => {
 
     const formattedProjectsData: ProjectDataType[] = projectsData.map(
       project => {
-        imageIndex++
-
-        return {
+        const formattedProject = {
           ...project,
           projectImage: formattedImagesResult.at(imageIndex)?.id,
           projectLinks: project.projectLinks?.map(projectLink => {
             imageIndex++
-
             return {
               ...projectLink,
               serviceIcon: formattedImagesResult.at(imageIndex)?.id,
             }
           }),
         }
+        imageIndex++
+        return formattedProject
       },
     )
 

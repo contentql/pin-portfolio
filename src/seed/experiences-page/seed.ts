@@ -21,7 +21,10 @@ const seed = async (spinner: Ora): Promise<any> => {
         if (block?.blockType === 'Experience') {
           return {
             ...block,
-            profilePicture: experiencesCompanyLogoSeedResult.id,
+            experiences: block?.experiences?.map(experience => ({
+              ...experience,
+              companyLogo: experiencesCompanyLogoSeedResult?.id,
+            })),
           }
         }
 

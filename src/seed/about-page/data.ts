@@ -16,10 +16,10 @@ export const aboutPageData: AboutPageDataType = {
         'Get to know me better - my story, interests, and aspirations',
 
       profileImage: 0,
-
       aboutYourSelf: 'Currently CTO at ContentQL',
       button: 'Say Hi!',
       buttonPath: 'contact',
+      blockName: null,
 
       Details: [
         {
@@ -108,7 +108,17 @@ export const aboutPageData: AboutPageDataType = {
   _status: 'published',
 }
 
-export const aboutPageProfileImageData: AboutImageType = {
-  alt: 'Profile',
-  filePath: path.join(process.cwd(), '/public/images/seed/profile.png'),
-}
+export const aboutPageImageData: AboutImageType[] = [
+  {
+    alt: 'Profile',
+    filePath: path.join(process.cwd(), '/public/images/seed/profile.png'),
+  },
+  {
+    alt: 'Leetcode',
+    filePath: path.join(process.cwd(), '/public/images/seed/leetcode.png'),
+  },
+  {
+    alt: 'Codechef',
+    filePath: path.join(process.cwd(), '/public/images/seed/codechef.png'),
+  },
+]
