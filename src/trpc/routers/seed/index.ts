@@ -8,6 +8,7 @@ import { seedHomePage } from '@/seed/home-page'
 import { seedProjectDetailsPage } from '@/seed/project-details-page'
 import { seedProjects } from '@/seed/projects'
 import { seedProjectsPage } from '@/seed/projects-page'
+import { seedSiteSettings } from '@/seed/site-settings'
 import { seedStacksPage } from '@/seed/stacks-page'
 import { publicProcedure, router } from '@/trpc'
 
@@ -31,6 +32,7 @@ export const seedRouter = router({
       await seedProjects(spinner)
       await seedProjectsPage(spinner)
       await seedProjectDetailsPage(spinner)
+      await seedSiteSettings(spinner)
 
       return { success: true }
     } catch (error: any) {

@@ -20,6 +20,7 @@ import { seedHomePage } from '@/seed/home-page'
 import { seedProjectDetailsPage } from '@/seed/project-details-page'
 import { seedProjects } from '@/seed/projects'
 import { seedProjectsPage } from '@/seed/projects-page'
+import { seedSiteSettings } from '@/seed/site-settings'
 import { seedStacksPage } from '@/seed/stacks-page'
 
 // Extract database name from the URI
@@ -81,6 +82,7 @@ const executeSeeding = async (): Promise<void> => {
     await seedProjects(spinner)
     await seedProjectsPage(spinner)
     await seedProjectDetailsPage(spinner)
+    await seedSiteSettings(spinner)
   } catch (error) {
     console.error(chalk.red('Error running seeds:'), error)
   } finally {

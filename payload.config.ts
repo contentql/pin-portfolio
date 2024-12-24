@@ -39,7 +39,7 @@ export default cqlConfig({
   secret: env.PAYLOAD_SECRET,
 
   dbURI: !isDevelopment ? env.DATABASE_URI : undefined,
-  dbSecret: !isDevelopment ? env.DATABASE_URI : undefined,
+  dbSecret: !isDevelopment ? env.DATABASE_SECRET : undefined,
   // sync: false,
 
   db: isDevelopment
