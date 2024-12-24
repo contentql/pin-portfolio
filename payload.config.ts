@@ -38,20 +38,14 @@ export default cqlConfig({
 
   secret: env.PAYLOAD_SECRET,
 
-  dbURI: !isDevelopment ? env.DATABASE_URI : undefined,
-  dbSecret: !isDevelopment ? env.DATABASE_SECRET : undefined,
   // sync: false,
 
-  db: isDevelopment
-    ? sqliteAdapter({
-        client: {
-          url: 'file:data/payload.db',
-          authToken: env.DATABASE_SECRET,
-          syncUrl: env.DATABASE_URI,
-          syncInterval: 60,
-        },
-      })
-    : undefined,
+  db: sqliteAdapter({
+    client: {
+      url: env.DATABASE_URI!,
+      authToken: env.DATABASE_SECRET,
+    },
+  }),
   s3: {
     accessKeyId: env.S3_ACCESS_KEY_ID,
     bucket: env.S3_BUCKET,
