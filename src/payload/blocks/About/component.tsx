@@ -82,13 +82,15 @@ const About: React.FC<AboutPage> = ({ params, ...block }) => {
                   variants={slideIn('left', 'tween', 50, 0.25 * (i + 1), 0.25)}
                   whileHover={{ scale: 0.95 }}
                   whileTap={{ scale: 0.9 }}>
-                  <Image
-                    height={1000}
-                    width={1000}
-                    className='size-7 rounded-lg sm:size-8'
-                    alt={(profile?.codeProfileImage as Media)?.alt! || 'Icon'}
-                    src={(profile?.codeProfileImage as Media)?.url!}
-                  />
+                  <div className='rounded-md bg-white p-1 md:rounded-lg md:p-1.5'>
+                    <Image
+                      height={1000}
+                      width={1000}
+                      className='size-4 sm:size-5'
+                      alt={(profile?.codeProfileImage as Media)?.alt! || 'Icon'}
+                      src={(profile?.codeProfileImage as Media)?.url!}
+                    />
+                  </div>
                   <p className='text-sm font-medium tracking-wide md:text-lg'>
                     {profile?.codeProfileTitle}
                   </p>
