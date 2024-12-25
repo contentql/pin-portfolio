@@ -3,7 +3,12 @@ import { Project } from '@payload-types'
 import { Ora } from 'ora'
 import { getPayload } from 'payload'
 
-import { ProjectDataType, projectsData, projectsImagesData } from './data'
+import {
+  ProjectDataType,
+  projectsData,
+  projectsImagesData,
+  projectsServicesImageData,
+} from './data'
 
 const payload = await getPayload({ config: configPromise })
 
@@ -11,7 +16,7 @@ const seed = async (spinner: Ora): Promise<(string | Project)[]> => {
   try {
     spinner.start(`Started created projects...`)
 
-    const imagesResult = await Promise.allSettled(
+    const projectImagesResult = await Promise.allSettled(
       projectsImagesData.map(projectImageData =>
         payload.create({
           collection: 'media',
@@ -22,8 +27,19 @@ const seed = async (spinner: Ora): Promise<(string | Project)[]> => {
         }),
       ),
     )
+    const projectServicesImagesResult = await Promise.allSettled(
+      projectsServicesImageData.map(projectImageData =>
+        payload.create({
+          collection: 'media',
+          data: {
+            alt: projectImageData.alt,
+          },
+          filePath: projectImageData.filePath,
+        }),
+      ),
+    )
 
-    const formattedImagesResult = imagesResult
+    const formattedProjectImagesResult = projectImagesResult
       .map(result =>
         result.status === 'fulfilled'
           ? result.value
@@ -31,22 +47,29 @@ const seed = async (spinner: Ora): Promise<(string | Project)[]> => {
       )
       .filter(result => typeof result !== 'string')
 
-    let imageIndex = 0
+    const formattedProjectServiceImagesResult = projectServicesImagesResult
+      .map(result =>
+        result.status === 'fulfilled'
+          ? result.value
+          : `Failed to seed: ${result.reason}`,
+      )
+      .filter(result => typeof result !== 'string')
+
+    let projectImageIndex = 0
 
     const formattedProjectsData: ProjectDataType[] = projectsData.map(
       project => {
         const formattedProject = {
           ...project,
-          projectImage: formattedImagesResult.at(imageIndex)?.id,
-          projectLinks: project.projectLinks?.map(projectLink => {
-            imageIndex++
+          projectImage: formattedProjectImagesResult.at(projectImageIndex)?.id,
+          projectLinks: project.projectLinks?.map((projectLink, index) => {
             return {
               ...projectLink,
-              serviceIcon: formattedImagesResult.at(imageIndex)?.id,
+              serviceIcon: formattedProjectServiceImagesResult.at(index)?.id,
             }
           }),
         }
-        imageIndex++
+        projectImageIndex++
         return formattedProject
       },
     )

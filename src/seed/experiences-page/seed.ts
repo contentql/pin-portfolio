@@ -2,18 +2,33 @@ import configPromise from '@payload-config'
 import { Ora } from 'ora'
 import { RequiredDataFromCollectionSlug, getPayload } from 'payload'
 
-import { companyLogoImageData, experiencesPageData } from './data'
+import { companyLogosImageData, experiencesPageData } from './data'
 
 const payload = await getPayload({ config: configPromise })
 
 const seed = async (spinner: Ora): Promise<any> => {
   try {
     spinner.start(`Started created experiences-page...`)
-    const experiencesCompanyLogoSeedResult = await payload.create({
-      collection: 'media',
-      data: { alt: companyLogoImageData?.alt },
-      filePath: companyLogoImageData?.filePath,
-    })
+    const experiencesCompanyLogoSeedResult = await Promise.allSettled(
+      companyLogosImageData?.map(logoImageData =>
+        payload.create({
+          collection: 'media',
+          data: {
+            alt: logoImageData.alt,
+          },
+          filePath: logoImageData.filePath,
+        }),
+      ),
+    )
+
+    const formattedExperiencesCompanyLogoSeedResult =
+      experiencesCompanyLogoSeedResult
+        .map(result =>
+          result.status === 'fulfilled'
+            ? result.value
+            : `Failed to seed: ${result.reason}`,
+        )
+        .filter(result => typeof result !== 'string')
 
     const experiencesResult: RequiredDataFromCollectionSlug<'pages'> = {
       ...experiencesPageData,
@@ -21,9 +36,9 @@ const seed = async (spinner: Ora): Promise<any> => {
         if (block?.blockType === 'Experience') {
           return {
             ...block,
-            experiences: block?.experiences?.map(experience => ({
+            experiences: block?.experiences?.map((experience, idx) => ({
               ...experience,
-              companyLogo: experiencesCompanyLogoSeedResult?.id,
+              companyLogo: formattedExperiencesCompanyLogoSeedResult[idx]?.id,
             })),
           }
         }

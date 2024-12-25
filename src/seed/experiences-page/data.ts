@@ -76,6 +76,51 @@ export const experiencesPageData: ExperiencesPageDataType = {
             },
           ],
         },
+        {
+          designation: 'Lead Software Engineer',
+          location: 'San Francisco',
+          tenure: 'Mar 2018 - Dec 2020',
+          companyName: 'TechForge Inc.',
+          companyLogo: 0,
+          companyWebsiteUrl: 'https://techforge.com',
+
+          aboutYourWork: [
+            {
+              workDescription:
+                'Architected and deployed a high-availability cloud-based CI/CD pipeline, reducing deployment time by 85% and improving developer productivity.',
+            },
+            {
+              workDescription:
+                'Led a cross-functional team to refactor legacy systems into microservices architecture, improving system scalability and reducing server costs by 30%.',
+            },
+            {
+              workDescription:
+                'Implemented real-time analytics dashboards with WebSockets and D3.js, enabling better decision-making for key stakeholders.',
+            },
+            {
+              workDescription:
+                'Conducted training sessions for junior developers on TypeScript and Node.js, contributing to a 40% skill improvement in the team.',
+            },
+          ],
+
+          techStack: [
+            {
+              techStackName: 'Node.js',
+            },
+            {
+              techStackName: 'AWS',
+            },
+            {
+              techStackName: 'Docker',
+            },
+            {
+              techStackName: 'MongoDB',
+            },
+            {
+              techStackName: 'TypeScript',
+            },
+          ],
+        },
       ],
 
       achievements: [
@@ -112,7 +157,16 @@ export const experiencesPageData: ExperiencesPageDataType = {
   _status: 'published',
 }
 
-export const companyLogoImageData: ExperienceImageType = {
-  alt: 'CompanyLogo',
-  filePath: path.join(process.cwd(), '/public/images/seed/contentql-logo.png'),
-}
+export const companyLogosImageData: ExperienceImageType[] = [
+  {
+    alt: 'CompanyLogo1',
+    filePath: path.join(
+      process.cwd(),
+      '/public/images/seed/contentql-logo.png',
+    ),
+  },
+  {
+    alt: 'CompanyLogo2',
+    filePath: path.join(process.cwd(), '/public/images/seed/techforge.png'),
+  },
+]

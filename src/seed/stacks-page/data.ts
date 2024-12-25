@@ -57,9 +57,9 @@ export const stacksPageData: StacksPageDataType = {
               techName: 'Redux',
             },
             {
-              color: '#e71c2e ',
+              color: '#83e11f ',
               techImage: 0,
-              techName: 'ReactQuery',
+              techName: 'Node.js',
             },
             {
               color: '#1ce797 ',
@@ -129,7 +129,7 @@ export const StacksTechnologiesImageData: StacksImageType[] = [
     filePath: path.join(process.cwd(), '/public/images/seed/framework-2.png'),
   },
   {
-    alt: 'ReactQuery',
+    alt: 'Node.js',
     filePath: path.join(process.cwd(), '/public/images/seed/framework-3.png'),
   },
   {
