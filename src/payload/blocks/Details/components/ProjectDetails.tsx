@@ -135,7 +135,7 @@ const ProjectDetails = ({ projects }: { projects: Project[] }) => {
                 <Image
                   src={(link?.serviceIcon as Media)?.url!}
                   alt='Icon'
-                  className='bx-sm h-6 w-6 pt-px'
+                  className='bx-sm h-6 w-6 pt-px dark:invert'
                   width={24}
                   height={24}
                   priority // Optional: For optimizing loading

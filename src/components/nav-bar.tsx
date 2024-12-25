@@ -98,9 +98,9 @@ const NavItem = ({
       <Image
         src={(icon as Media)?.url!} // Adjust the function to return the correct image path or URL
         alt={(icon as Media)?.alt || 'icon'}
-        width={32} // Set the width to match your design
-        height={32} // Set the height to match your design
-        className='text-2xl transition-colors duration-300 ease-in-out group-hover:text-primary dark:group-hover:text-secondary md:hidden'
+        width={24} // Set the width to match your design
+        height={25} // Set the height to match your design
+        className='text-2xl transition-colors duration-300 ease-in-out group-hover:text-primary dark:invert dark:group-hover:text-secondary md:hidden'
       />
       <p className='hidden text-lg font-semibold capitalize tracking-wider transition-colors duration-300 ease-in-out group-hover:text-primary dark:group-hover:text-secondary md:block'>
         {label}
