@@ -5,7 +5,8 @@ import { usePathname } from 'next/navigation'
 import { trpc } from '@/trpc/client'
 
 import ErrorComponent from './ErrorComponent'
-import Button from './common/Button'
+import Spinner from './common/Spinner'
+import Button from './ui/button'
 
 const PageNotFound: React.FC = () => {
   const pathname = usePathname()
@@ -24,16 +25,15 @@ const PageNotFound: React.FC = () => {
         <p className='my-4 p-2 text-center'>
           {isPending
             ? '⏰please hold-on this process might take some time'
-            : 'Click below👇 to instantly load demo content-blogs, authors, tags, and pages'}
+            : 'Click below👇 to instantly load demo projects and pages'}
         </p>
 
         <Button
-          isLoading={isPending}
           disabled={isPending}
           onClick={() => {
             runSeedMutation()
           }}>
-          Load Demo Data
+          {isPending ? <Spinner /> : 'Load Demo Data'}
         </Button>
       </section>
     )
