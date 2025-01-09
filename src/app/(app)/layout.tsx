@@ -145,20 +145,20 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
       ? generalSettings?.faviconUrl?.url!
       : '/favicon.ico'
 
-  const { dark, light } = metadata?.theme || {}
+  const { darkMode: dark, lightMode: light } = metadata?.themeSettings || {}
   return (
     <html
       lang='en'
       style={
         {
-          '--primary': hexToHsl(light?.primaryColor || '#c084fc'),
-          '--secondary': hexToHsl(dark?.primaryColor || '#60a5fa'),
-          '--bg-light': hexToHsl(light?.foregroundColor || '#e2e8f0'),
-          '--bg-lighter': hexToHsl(light?.backgroundColor || '#f8fafc'),
-          '--bg-dark': hexToHsl(dark?.foregroundColor || '#1e293b'),
-          '--bg-darker': hexToHsl(dark?.backgroundColor || '#0f172a'),
-          '--text-white': hexToHsl(dark?.textColor || '#FFFAFA'),
-          '--text-black': hexToHsl(light?.textColor || '#0F0F0F'),
+          '--primary': hexToHsl(light?.primary || '#c084fc'),
+          '--secondary': hexToHsl(dark?.primary || '#60a5fa'),
+          '--bg-light': hexToHsl(light?.foreground || '#e2e8f0'),
+          '--bg-lighter': hexToHsl(light?.background || '#f8fafc'),
+          '--bg-dark': hexToHsl(dark?.foreground || '#1e293b'),
+          '--bg-darker': hexToHsl(dark?.background || '#0f172a'),
+          '--text-white': hexToHsl(dark?.text || '#FFFAFA'),
+          '--text-black': hexToHsl(light?.text || '#0F0F0F'),
         } as React.CSSProperties & { [key: `--${string}`]: string }
       }>
       <head>

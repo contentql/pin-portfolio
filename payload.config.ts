@@ -1,12 +1,12 @@
 import { collectionSlug, cqlConfig } from '@contentql/core'
 import { env } from '@env'
-import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import { slateEditor } from '@payloadcms/richtext-slate'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
 import { ResetPassword } from '@/emails/reset-password'
 import { UserAccountVerification } from '@/emails/verify-email'
+import { migrations } from '@/migrations'
 import { isAdmin } from '@/payload/access'
 import { blocksConfig } from '@/payload/blocks/blockConfig'
 import { revalidateAuthors } from '@/payload/hooks/revalidateAuthors'
@@ -22,6 +22,19 @@ const dirname = path.dirname(filename)
 
 const isDevelopment = process.env.NODE_ENV === 'development'
 
+const convertRailwayURL = (url: string) => {
+  const railwayDomain = '.up.railway.app'
+  const contentqlDomain = '.contentql.io'
+
+  // Check if the URL ends with .up.railway.app or contains it
+  if (url.includes(railwayDomain)) {
+    return url.replace(railwayDomain, contentqlDomain)
+  }
+
+  // Return the original URL if it doesn't match
+  return url
+}
+
 export default cqlConfig({
   admin: {
     components: {
@@ -31,8 +44,8 @@ export default cqlConfig({
       },
     },
   },
-  cors: [env.PAYLOAD_URL],
-  csrf: [env.PAYLOAD_URL],
+  cors: [env.PAYLOAD_URL, convertRailwayURL(env.PAYLOAD_URL)],
+  csrf: [env.PAYLOAD_URL, convertRailwayURL(env.PAYLOAD_URL)],
 
   baseURL: env.PAYLOAD_URL,
 
@@ -40,12 +53,10 @@ export default cqlConfig({
 
   // sync: false,
 
-  db: sqliteAdapter({
-    client: {
-      url: env.DATABASE_URI!,
-      authToken: env.DATABASE_SECRET,
-    },
-  }),
+  dbURI: env.DATABASE_URI,
+  dbSecret: env.DATABASE_SECRET,
+  syncDB: false,
+  prodMigrations: migrations,
   s3: {
     accessKeyId: env.S3_ACCESS_KEY_ID,
     bucket: env.S3_BUCKET,
@@ -262,182 +273,7 @@ export default cqlConfig({
   globals: [
     {
       slug: 'site-settings',
-      fields: [
-        {
-          type: 'tabs',
-          label: 'Settings',
-          tabs: [
-            {
-              label: 'Redirection Links',
-              name: 'redirectionLinks',
-              fields: [
-                {
-                  name: 'blogLink',
-                  type: 'relationship',
-                  relationTo: 'pages',
-                  label: 'Blog redirect link',
-                  maxDepth: 1,
-                  admin: {
-                    description: 'This redirects to a blog details page',
-                  },
-                },
-                {
-                  name: 'authorLink',
-                  type: 'relationship',
-                  relationTo: 'pages',
-                  label: 'Author redirect link',
-                  maxDepth: 1,
-                  admin: {
-                    description: 'This redirects to a author details page',
-                  },
-                },
-                {
-                  name: 'tagLink',
-                  type: 'relationship',
-                  relationTo: 'pages',
-                  label: 'Tag redirect link',
-                  maxDepth: 1,
-                  admin: {
-                    description: 'This redirects to a tag details page',
-                  },
-                },
-              ],
-            },
-            {
-              label: 'Monetization',
-              name: 'monetization',
-              fields: [
-                {
-                  name: 'adSenseId',
-                  type: 'text',
-                  label: 'Google AdSense',
-                  admin: {
-                    description:
-                      'Add the publisher-id from Google AdSense Console',
-                  },
-                },
-              ],
-              admin: {
-                hidden: true,
-              },
-            },
-            {
-              name: 'theme',
-              label: 'Theme',
-              fields: [
-                {
-                  type: 'row',
-                  fields: [
-                    // Light theme
-                    {
-                      name: 'light',
-                      type: 'group',
-                      fields: [
-                        {
-                          name: 'primaryColor',
-                          type: 'text',
-                          label: 'Primary Color',
-                          defaultValue: '#C084FC',
-                          admin: {
-                            components: {
-                              Field: '@/payload/fields/ColorField',
-                            },
-                          },
-                        },
-                        {
-                          name: 'backgroundColor',
-                          type: 'text',
-                          label: 'Background Color',
-                          defaultValue: '#F8FAFC',
-                          admin: {
-                            components: {
-                              Field: '@/payload/fields/ColorField',
-                            },
-                          },
-                        },
-                        {
-                          name: 'foregroundColor',
-                          type: 'text',
-                          label: 'Foreground Color',
-                          defaultValue: '#E2E8F0',
-                          admin: {
-                            components: {
-                              Field: '@/payload/fields/ColorField',
-                            },
-                          },
-                        },
-                        {
-                          name: 'textColor',
-                          type: 'text',
-                          label: 'Text Color',
-                          defaultValue: '#0F0F0F',
-                          admin: {
-                            components: {
-                              Field: '@/payload/fields/ColorField',
-                            },
-                          },
-                        },
-                      ],
-                    },
-
-                    // Dark theme
-                    {
-                      name: 'dark',
-                      type: 'group',
-                      fields: [
-                        {
-                          name: 'primaryColor',
-                          type: 'text',
-                          label: 'Primary Color',
-                          defaultValue: '#60A5FA',
-                          admin: {
-                            components: {
-                              Field: '@/payload/fields/ColorField',
-                            },
-                          },
-                        },
-                        {
-                          name: 'backgroundColor',
-                          type: 'text',
-                          label: 'Background Color',
-                          defaultValue: '#0F172A',
-                          admin: {
-                            components: {
-                              Field: '@/payload/fields/ColorField',
-                            },
-                          },
-                        },
-                        {
-                          name: 'foregroundColor',
-                          type: 'text',
-                          label: 'Foreground Color',
-                          defaultValue: '#1E293B',
-                          admin: {
-                            components: {
-                              Field: '@/payload/fields/ColorField',
-                            },
-                          },
-                        },
-                        {
-                          name: 'textColor',
-                          type: 'text',
-                          label: 'Text Color',
-                          defaultValue: '#FFFAFA',
-                          admin: {
-                            components: {
-                              Field: '@/payload/fields/ColorField',
-                            },
-                          },
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-      ],
+      fields: [],
       hooks: {
         afterChange: [revalidateSiteSettings],
       },

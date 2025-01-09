@@ -98,11 +98,17 @@ export interface Page {
   meta?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (number | null) | Media;
   };
   isHome?: boolean | null;
   isDynamic?: boolean | null;
   slugMode?: ('generate' | 'custom') | null;
+  /**
+   * Contains only lowercase letters, numbers, and dashes.
+   */
   slug?: string | null;
   pathMode?: ('generate' | 'custom') | null;
   path?: string | null;
@@ -124,18 +130,45 @@ export interface Page {
  * via the `definition` "HomeType".
  */
 export interface HomeType {
+  /**
+   * The greeting text displayed on the home page.
+   */
   greetText?: string | null;
+  /**
+   * The name to be displayed prominently on the home page.
+   */
   name: string;
+  /**
+   * A short description or tagline to describe yourself or your site.
+   */
   description?: string | null;
+  /**
+   * A profile picture to display on the home page.
+   */
   profilePicture: number | Media;
+  /**
+   * A list of social media links to display on the home page.
+   */
   socialLinks?:
     | {
+        /**
+         * Select the social media platform for this link.
+         */
         socialIcon: 'facebook' | 'github' | 'gmail' | 'instagram' | 'linkedin' | 'twitter';
+        /**
+         * The URL to the social media profile.
+         */
         socialIconLink: string;
         id?: string | null;
       }[]
     | null;
+  /**
+   * The text for the main call-to-action button on the home page.
+   */
   button?: string | null;
+  /**
+   * The URL or path the button navigates to.
+   */
   buttonPath?: string | null;
   id?: string | null;
   blockName?: string | null;
@@ -191,15 +224,39 @@ export interface Media {
  * via the `definition` "StacksType".
  */
 export interface StacksType {
+  /**
+   * The main heading for the Stacks section.
+   */
   stacksHeading?: string | null;
+  /**
+   * A brief description for the Stacks section.
+   */
   stacksDescription?: string | null;
+  /**
+   * A list of technologies to showcase in this section.
+   */
   technologies?:
     | {
+        /**
+         * The heading for a specific technology group.
+         */
         techHeading?: string | null;
+        /**
+         * An array of technologies within this group.
+         */
         techStacks?:
           | {
+              /**
+               * The color associated with this technology.
+               */
               color: string;
+              /**
+               * The name of the technology.
+               */
               techName?: string | null;
+              /**
+               * An image representing the technology, uploaded from the media library.
+               */
               techImage?: (number | null) | Media;
               id?: string | null;
             }[]
@@ -216,17 +273,47 @@ export interface StacksType {
  * via the `definition` "AboutType".
  */
 export interface AboutType {
+  /**
+   * The main heading for the About section.
+   */
   aboutHeading?: string | null;
+  /**
+   * A detailed description for the About section.
+   */
   aboutDescription?: string | null;
+  /**
+   * An image that represents the profile, uploaded from the media library.
+   */
   profileImage?: (number | null) | Media;
+  /**
+   * A short text describing yourself.
+   */
   aboutYourSelf?: string | null;
+  /**
+   * The text to display on the call-to-action button.
+   */
   button?: string | null;
+  /**
+   * The URL or path that the button links to.
+   */
   buttonPath?: string | null;
+  /**
+   * An array of detailed information items.
+   */
   Details?:
     | {
+        /**
+         * The title for this details section.
+         */
         detailsTitle?: string | null;
+        /**
+         * A list of points under this detail section.
+         */
         detailsPoints?:
           | {
+              /**
+               * A single point of detail.
+               */
               detailPoint?: string | null;
               id?: string | null;
             }[]
@@ -234,14 +321,35 @@ export interface AboutType {
         id?: string | null;
       }[]
     | null;
+  /**
+   * A list of code profiles for showcasing your work.
+   */
   codeProfiles?:
     | {
+        /**
+         * The heading for the code profiles section.
+         */
         Heading?: string | null;
+        /**
+         * An array of individual code profiles.
+         */
         codeProfile?:
           | {
+              /**
+               * The title of the code profile.
+               */
               codeProfileTitle?: string | null;
+              /**
+               * The URL to the code profile.
+               */
               codeProfileUrl?: string | null;
+              /**
+               * An image representing the code profile, uploaded from the media library.
+               */
               codeProfileImage?: (number | null) | Media;
+              /**
+               * The color associated with this code profile.
+               */
               color: string;
               id?: string | null;
             }[]
@@ -258,24 +366,63 @@ export interface AboutType {
  * via the `definition` "ExperienceType".
  */
 export interface ExperienceType {
+  /**
+   * The main heading for the Experiences section.
+   */
   experiencesHeading?: string | null;
+  /**
+   * A brief description or introduction for the Experiences section.
+   */
   experiencesDescription?: string | null;
+  /**
+   * A list of professional experiences.
+   */
   experiences?:
     | {
+        /**
+         * The job title or position held.
+         */
         designation?: string | null;
+        /**
+         * The geographical location of the job.
+         */
         location?: string | null;
+        /**
+         * The duration of the job or position held.
+         */
         tenure?: string | null;
+        /**
+         * The name of the company or organization.
+         */
         companyName?: string | null;
+        /**
+         * The logo of the company, uploaded from the media library.
+         */
         companyLogo?: (number | null) | Media;
+        /**
+         * The URL to the company’s official website.
+         */
         companyWebsiteUrl?: string | null;
+        /**
+         * Details about the work performed at the job.
+         */
         aboutYourWork?:
           | {
+              /**
+               * A single point describing the work.
+               */
               workDescription?: string | null;
               id?: string | null;
             }[]
           | null;
+        /**
+         * A list of technologies used during the job.
+         */
         techStack?:
           | {
+              /**
+               * The name of a technology or tool used.
+               */
               techStackName?: string | null;
               id?: string | null;
             }[]
@@ -283,10 +430,22 @@ export interface ExperienceType {
         id?: string | null;
       }[]
     | null;
+  /**
+   * The heading for the Achievements section.
+   */
   achievementsHeading?: string | null;
+  /**
+   * A brief description or introduction for the Achievements section.
+   */
   achievementsDescription?: string | null;
+  /**
+   * A list of significant achievements.
+   */
   achievements?:
     | {
+        /**
+         * A single achievement.
+         */
         achievement?: string | null;
         id?: string | null;
       }[]
@@ -300,11 +459,26 @@ export interface ExperienceType {
  * via the `definition` "ContactType".
  */
 export interface ContactType {
+  /**
+   * The main heading for the Contact section.
+   */
   contactHeading?: string | null;
+  /**
+   * A brief description or introduction for the Contact section.
+   */
   contactDescription?: string | null;
+  /**
+   * A list of reasons for contacting, each with a description.
+   */
   contactReasons?:
     | {
+        /**
+         * The title or main reason for contacting.
+         */
         reason?: string | null;
+        /**
+         * A detailed explanation or additional information about the reason.
+         */
         description?: string | null;
         id?: string | null;
       }[]
@@ -328,6 +502,9 @@ export interface DetailsType {
  * via the `definition` "ListType".
  */
 export interface ListType {
+  /**
+   * This will be used as title for the list
+   */
   title?: string | null;
   collectionSlug?: ('blogs' | 'tags' | 'users' | 'projects') | null;
   id?: string | null;
@@ -445,6 +622,9 @@ export interface Form {
       )[]
     | null;
   submitButtonLabel?: string | null;
+  /**
+   * Choose whether to display an on-page message or redirect to a different page after they submit the form.
+   */
   confirmationType?: ('message' | 'redirect') | null;
   confirmationMessage?:
     | {
@@ -454,6 +634,9 @@ export interface Form {
   redirect?: {
     url: string;
   };
+  /**
+   * Send custom emails when the form submits. Use comma separated lists to send the same email to multiple recipients. To reference a value from this form, wrap that field's name with double curly brackets, i.e. {{firstName}}. You can use a wildcard {{*}} to output all data and {{*:table}} to format it as an HTML table in the email.
+   */
   emails?:
     | {
         emailTo?: string | null;
@@ -462,6 +645,9 @@ export interface Form {
         replyTo?: string | null;
         emailFrom?: string | null;
         subject: string;
+        /**
+         * Enter the message that should be sent in this email.
+         */
         message?:
           | {
               [k: string]: unknown;
@@ -479,6 +665,9 @@ export interface Form {
  */
 export interface DisqusCommentsType {
   title?: string | null;
+  /**
+   * To find your Disqus shortname, log into Disqus, access the Admin panel, and check the URL or General Site Settings.
+   */
   shortName: string;
   id?: string | null;
   blockName?: string | null;
@@ -490,8 +679,14 @@ export interface DisqusCommentsType {
  */
 export interface Blog {
   id: number;
+  /**
+   * Upload blog image
+   */
   blogImage: number | Media;
   title: string;
+  /**
+   * Add the summary of the blog post
+   */
   description: string;
   tags?:
     | {
@@ -505,15 +700,27 @@ export interface Blog {
         value: number | User;
       }[]
     | null;
+  /**
+   * Main content of the blog post. Use the rich text editor for formatting.
+   */
   content: {
     [k: string]: unknown;
   }[];
   meta?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (number | null) | Media;
   };
+  /**
+   * Contains only lowercase letters, numbers, and dashes.
+   */
   slug?: string | null;
+  /**
+   * Save it as draft to schedule.
+   */
   publishOn?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -525,6 +732,9 @@ export interface Blog {
  */
 export interface Tag {
   id: number;
+  /**
+   * Upload tag image
+   */
   tagImage: number | Media;
   title: string;
   description: string;
@@ -532,8 +742,14 @@ export interface Tag {
   meta?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (number | null) | Media;
   };
+  /**
+   * Contains only lowercase letters, numbers, and dashes.
+   */
   slug?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -546,6 +762,9 @@ export interface Tag {
 export interface User {
   id: number;
   displayName?: string | null;
+  /**
+   * Contains only lowercase letters, numbers, and dashes.
+   */
   username: string;
   imageUrl?: (number | null) | Media;
   role: ('admin' | 'author' | 'user')[];
@@ -574,6 +793,9 @@ export interface User {
         id?: string | null;
       }[]
     | null;
+  /**
+   * This bio will be shown in the authors details page
+   */
   bio?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -619,6 +841,9 @@ export interface Project {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Contains only lowercase letters, numbers, and dashes.
+   */
   slug?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -642,6 +867,8 @@ export interface FormSubmission {
   createdAt: string;
 }
 /**
+ * This is a collection of automatically created search results. These results are used by the global site search and will be updated automatically as documents in the CMS are created or updated.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "search".
  */
@@ -1330,18 +1557,54 @@ export interface SiteSetting {
   general: {
     title: string;
     description: string;
+    /**
+     * We recommend a maximum size of 256 * 256 pixels
+     */
     faviconUrl: number | Media;
+    /**
+     * We recommend a maximum size of 1200 * 630 pixels
+     */
     ogImageUrl: number | Media;
     keywords?: string[] | null;
+    /**
+     * This field is used to format currency values & used as default currency for ecommerce-theme
+     */
+    currency:
+      | 'usd'
+      | 'eur'
+      | 'inr'
+      | 'gbp'
+      | 'jpy'
+      | 'cad'
+      | 'aud'
+      | 'chf'
+      | 'cny'
+      | 'hkd'
+      | 'sgd'
+      | 'mxn'
+      | 'brl'
+      | 'rub'
+      | 'krw'
+      | 'zar'
+      | 'try'
+      | 'sar'
+      | 'aed'
+      | 'pln';
   };
   navbar: {
     logo: BrandLogo;
     menuLinks?:
       | {
+          /**
+           * Check to create group of links
+           */
           group?: boolean | null;
           menuLink?: {
             type?: ('reference' | 'custom') | null;
             newTab?: boolean | null;
+            /**
+             * Upload an svg or logo to be displayed with link
+             */
             icon?: (number | null) | Media;
             label: string;
             page?: {
@@ -1357,6 +1620,9 @@ export interface SiteSetting {
               | {
                   type?: ('reference' | 'custom') | null;
                   newTab?: boolean | null;
+                  /**
+                   * Upload an svg or logo to be displayed with link
+                   */
                   icon?: (number | null) | Media;
                   label: string;
                   page?: {
@@ -1376,10 +1642,16 @@ export interface SiteSetting {
     logo: BrandLogo;
     footerLinks?:
       | {
+          /**
+           * Check to create group of links
+           */
           group?: boolean | null;
           menuLink?: {
             type?: ('reference' | 'custom') | null;
             newTab?: boolean | null;
+            /**
+             * Upload an svg or logo to be displayed with link
+             */
             icon?: (number | null) | Media;
             label: string;
             page?: {
@@ -1395,6 +1667,9 @@ export interface SiteSetting {
               | {
                   type?: ('reference' | 'custom') | null;
                   newTab?: boolean | null;
+                  /**
+                   * Upload an svg or logo to be displayed with link
+                   */
                   icon?: (number | null) | Media;
                   label: string;
                   page?: {
@@ -1436,190 +1711,77 @@ export interface SiteSetting {
     copyright?: string | null;
   };
   redirectionLinks?: {
+    /**
+     * This redirects to a blog details page
+     */
     blogLink?: {
       relationTo: 'pages';
       value: number | Page;
     } | null;
+    /**
+     * This redirect to a product details page
+     */
     productLink?: {
       relationTo: 'pages';
       value: number | Page;
     } | null;
+    /**
+     * This redirects to a author details page
+     */
     authorLink?: {
       relationTo: 'pages';
       value: number | Page;
     } | null;
+    /**
+     * This redirects to a tag details page
+     */
     tagLink?: {
       relationTo: 'pages';
       value: number | Page;
     } | null;
   };
   monetization?: {
+    /**
+     * Add the publisher-id from Google AdSense Console
+     */
     adSenseId?: string | null;
+    /**
+     * Add the measurement id from Google Analytics dashboard
+     */
     measurementId?: string | null;
   };
-  stripeConnect?: {
-    country?:
-      | (
-          | 'AL'
-          | 'DZ'
-          | 'AO'
-          | 'AG'
-          | 'AR'
-          | 'AM'
-          | 'AU'
-          | 'AT'
-          | 'AZ'
-          | 'BS'
-          | 'BH'
-          | 'BD'
-          | 'BE'
-          | 'BJ'
-          | 'BT'
-          | 'BO'
-          | 'BA'
-          | 'BW'
-          | 'BN'
-          | 'BG'
-          | 'KH'
-          | 'CA'
-          | 'CL'
-          | 'CO'
-          | 'CR'
-          | 'CI'
-          | 'HR'
-          | 'CY'
-          | 'CZ'
-          | 'DK'
-          | 'DO'
-          | 'EC'
-          | 'EG'
-          | 'SV'
-          | 'EE'
-          | 'ET'
-          | 'FI'
-          | 'FR'
-          | 'GA'
-          | 'GM'
-          | 'DE'
-          | 'GH'
-          | 'GR'
-          | 'GT'
-          | 'GY'
-          | 'HK'
-          | 'HU'
-          | 'IS'
-          | 'IN'
-          | 'ID'
-          | 'IE'
-          | 'IL'
-          | 'IT'
-          | 'JM'
-          | 'JP'
-          | 'JO'
-          | 'KZ'
-          | 'KE'
-          | 'KW'
-          | 'LA'
-          | 'LV'
-          | 'LI'
-          | 'LT'
-          | 'LU'
-          | 'MO'
-          | 'MG'
-          | 'MY'
-          | 'MT'
-          | 'MU'
-          | 'MX'
-          | 'MD'
-          | 'MC'
-          | 'MN'
-          | 'MA'
-          | 'MZ'
-          | 'NA'
-          | 'NL'
-          | 'NZ'
-          | 'NE'
-          | 'NG'
-          | 'MK'
-          | 'NO'
-          | 'OM'
-          | 'PK'
-          | 'PA'
-          | 'PY'
-          | 'PE'
-          | 'PH'
-          | 'PL'
-          | 'PT'
-          | 'QA'
-          | 'RO'
-          | 'RW'
-          | 'SM'
-          | 'SA'
-          | 'SN'
-          | 'RS'
-          | 'SG'
-          | 'SK'
-          | 'SI'
-          | 'ZA'
-          | 'KR'
-          | 'ES'
-          | 'LK'
-          | 'LC'
-          | 'SE'
-          | 'CH'
-          | 'TW'
-          | 'TZ'
-          | 'TH'
-          | 'TT'
-          | 'TN'
-          | 'TR'
-          | 'AE'
-          | 'GB'
-          | 'UY'
-          | 'UZ'
-          | 'VN'
-        )
-      | null;
-    currency?:
-      | (
-          | 'usd'
-          | 'eur'
-          | 'inr'
-          | 'gbp'
-          | 'jpy'
-          | 'cad'
-          | 'aud'
-          | 'chf'
-          | 'cny'
-          | 'hkd'
-          | 'sgd'
-          | 'mxn'
-          | 'brl'
-          | 'rub'
-          | 'krw'
-          | 'zar'
-          | 'try'
-          | 'sar'
-          | 'aed'
-          | 'pln'
-        )
-      | null;
-    stripeUserId?: string | null;
-    stripeAdminDashboard?: string | null;
-  };
-  theme?: {
-    light?: {
-      primaryColor?: string | null;
-      backgroundColor?: string | null;
-      foregroundColor?: string | null;
-      textColor?: string | null;
+  themeSettings: {
+    lightMode: {
+      primary: string;
+      background: string;
+      text: string;
+      foreground: string;
+      popover: string;
+      border: string;
     };
-    dark?: {
-      primaryColor?: string | null;
-      backgroundColor?: string | null;
-      foregroundColor?: string | null;
-      textColor?: string | null;
+    darkMode: {
+      primary: string;
+      background: string;
+      text: string;
+      foreground: string;
+      popover: string;
+      border: string;
     };
+    fonts: {
+      display: {
+        type: 'customFont' | 'googleFont';
+        customFont?: (number | null) | Media;
+        remoteFont?: string | null;
+        fontName?: string | null;
+      };
+      body: {
+        type: 'customFont' | 'googleFont';
+        customFont?: (number | null) | Media;
+        remoteFont?: string | null;
+        fontName?: string | null;
+      };
+    };
+    radius: 'none' | 'small' | 'medium' | 'large' | 'full';
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1630,8 +1792,17 @@ export interface SiteSetting {
  */
 export interface BrandLogo {
   imageUrl: number | Media;
+  /**
+   * Adjust to the height of the logo
+   */
   height?: number | null;
+  /**
+   * Adjust to the width of the logo
+   */
   width?: number | null;
+  /**
+   * This text appears below the footer image
+   */
   description?: string | null;
 }
 /**
@@ -1647,6 +1818,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
         faviconUrl?: T;
         ogImageUrl?: T;
         keywords?: T;
+        currency?: T;
       };
   navbar?:
     | T
@@ -1746,33 +1918,50 @@ export interface SiteSettingsSelect<T extends boolean = true> {
         adSenseId?: T;
         measurementId?: T;
       };
-  stripeConnect?:
+  themeSettings?:
     | T
     | {
-        country?: T;
-        currency?: T;
-        stripeUserId?: T;
-        stripeAdminDashboard?: T;
-      };
-  theme?:
-    | T
-    | {
-        light?:
+        lightMode?:
           | T
           | {
-              primaryColor?: T;
-              backgroundColor?: T;
-              foregroundColor?: T;
-              textColor?: T;
+              primary?: T;
+              background?: T;
+              text?: T;
+              foreground?: T;
+              popover?: T;
+              border?: T;
             };
-        dark?:
+        darkMode?:
           | T
           | {
-              primaryColor?: T;
-              backgroundColor?: T;
-              foregroundColor?: T;
-              textColor?: T;
+              primary?: T;
+              background?: T;
+              text?: T;
+              foreground?: T;
+              popover?: T;
+              border?: T;
             };
+        fonts?:
+          | T
+          | {
+              display?:
+                | T
+                | {
+                    type?: T;
+                    customFont?: T;
+                    remoteFont?: T;
+                    fontName?: T;
+                  };
+              body?:
+                | T
+                | {
+                    type?: T;
+                    customFont?: T;
+                    remoteFont?: T;
+                    fontName?: T;
+                  };
+            };
+        radius?: T;
       };
   updatedAt?: T;
   createdAt?: T;

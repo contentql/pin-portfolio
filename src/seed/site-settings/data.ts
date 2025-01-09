@@ -17,6 +17,7 @@ export const siteSettingsData: siteSettingsDataType = {
     description: 'This is my portfolio',
     faviconUrl: 0,
     ogImageUrl: 0,
+    currency: 'usd',
   },
   navbar: {
     logo: {
@@ -99,25 +100,42 @@ export const siteSettingsData: siteSettingsDataType = {
     adSenseId: null,
     measurementId: null,
   },
-  stripeConnect: {
-    country: null,
-    currency: null,
-    stripeUserId: null,
-    stripeAdminDashboard: null,
-  },
-  theme: {
-    light: {
-      primaryColor: '#cb83fb',
-      backgroundColor: '#F8FAFC',
-      foregroundColor: '#E2E8F0',
-      textColor: '#0F0F0F',
+
+  themeSettings: {
+    lightMode: {
+      primary: '#cb83fb',
+      background: '#F8FAFC',
+      foreground: '#E2E8F0',
+      text: '#0F0F0F',
+      border: '#000000',
+      popover: '#000000',
     },
-    dark: {
-      primaryColor: '#60b8fb',
-      backgroundColor: '#0F172A',
-      foregroundColor: '#1E293B',
-      textColor: '#FFFAFA',
+    darkMode: {
+      primary: '#60b8fb',
+      background: '#0F172A',
+      foreground: '#1E293B',
+      text: '#FFFAFA',
+      border: '#000000',
+      popover: '#000000',
     },
+    fonts: {
+      display: {
+        type: 'googleFont',
+        customFont: null,
+        remoteFont:
+          'https://fonts.googleapis.com/css2?family=Chewy&display=swap',
+        fontName: 'Chewy',
+      },
+
+      body: {
+        type: 'googleFont',
+        customFont: null,
+        remoteFont:
+          'https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap',
+        fontName: 'Roboto',
+      },
+    },
+    radius: 'none',
   },
   // globalType: 'site-settings',
 }
